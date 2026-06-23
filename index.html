@@ -1,0 +1,1271 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Diego Rodriguez — Project Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1F1ED;
+    --paper-2:#E7E7E1;
+    --paper-3:#DCDCD4;
+    --ink:#0E1014;
+    --ink-2:#2A2D33;
+    --muted:#6B6E76;
+    --rule:#D2D2CB;
+    --rule-2:#B7B7AF;
+    --accent:#2A6FDB;
+    --accent-deep:#1B4FA8;
+    --accent-tint:#E1ECFB;
+    --sans:'Geist','Helvetica Neue',Helvetica,Arial,sans-serif;
+    --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;font-size:14.5px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"ss01","cv11"}
+
+  /* ---------- engineering grid background (very subtle) ---------- */
+  body::before{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(to right, rgba(14,16,20,0.035) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(14,16,20,0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    opacity:.45;
+  }
+
+  /* ---------- layout ---------- */
+  .frame{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding:0 56px}
+  section{position:relative;padding:88px 0;border-top:1px solid var(--rule)}
+  section:first-of-type{border-top:0;padding-top:0}
+
+  /* ---------- typography ---------- */
+  .mono{font-family:var(--mono);font-feature-settings:"zero","ss02"}
+  .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .accent{color:var(--accent)}
+  h1,h2,h3,h4,h5{margin:0;font-weight:500;letter-spacing:-0.015em}
+  p{margin:0 0 12px 0;max-width:64ch}
+  a{color:var(--accent-deep);text-decoration-thickness:1px;text-underline-offset:3px}
+  ::selection{background:var(--accent);color:#fff}
+
+  /* ---------- TOP NAV ---------- */
+  .topbar{position:sticky;top:0;z-index:50;background:rgba(241,241,237,0.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+  .topbar-inner{max-width:1240px;margin:0 auto;padding:12px 56px;display:flex;align-items:center;gap:32px;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase}
+  .topbar .who{color:var(--ink);font-weight:500;display:flex;align-items:center;gap:10px}
+  .topbar .who::before{content:"";width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block}
+  .topbar .sep{color:var(--muted)}
+  .topbar nav{margin-left:auto;display:flex;gap:22px}
+  .topbar nav a{color:var(--muted);text-decoration:none;position:relative;padding-bottom:2px;transition:color .15s;font-weight:500}
+  .topbar nav a:hover{color:var(--ink)}
+  .topbar nav a.active{color:var(--ink)}
+  .topbar nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-13px;height:2px;background:var(--accent)}
+  .topbar .pill{border:1px solid var(--rule-2);color:var(--ink-2);padding:5px 10px;border-radius:2px;font-size:10px;font-weight:500;background:var(--paper)}
+
+  /* ---------- CORNER BRACKETS (engineering drawing marks) ---------- */
+  .bracketed{position:relative}
+  .bracketed::before, .bracketed::after,
+  .bracketed > .br-tl, .bracketed > .br-tr, .bracketed > .br-bl, .bracketed > .br-br{
+    position:absolute;width:10px;height:10px;content:"";border-color:var(--ink);border-style:solid;border-width:0;pointer-events:none
+  }
+  .bracketed::before{top:-1px;left:-1px;border-top-width:1px;border-left-width:1px}
+  .bracketed::after{top:-1px;right:-1px;border-top-width:1px;border-right-width:1px}
+  .bracketed > .br-bl{bottom:-1px;left:-1px;border-bottom-width:1px;border-left-width:1px}
+  .bracketed > .br-br{bottom:-1px;right:-1px;border-bottom-width:1px;border-right-width:1px}
+
+  /* ---------- DRAWING NO. badge ---------- */
+  .dwg{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+  .dwg::before{content:"";width:14px;height:1px;background:var(--muted);display:inline-block}
+
+  /* ============ COVER / OVERVIEW (page 1) ============ */
+  .cover{padding:32px 0 64px 0;border-top:0}
+  .cover-rule{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:18px;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--ink)}
+  .cover-rule .line{height:1px;background:var(--rule-2)}
+  .cover-rule b{color:var(--ink);font-weight:500}
+
+  .hero{display:grid;grid-template-columns:1fr 320px;gap:48px;align-items:start;margin-top:48px;padding-bottom:48px;border-bottom:1px solid var(--rule)}
+  .hero-name{font-size:104px;line-height:.9;letter-spacing:-0.04em;font-weight:600}
+  .hero-name .accent-dot{color:var(--accent)}
+  .hero-tag{font-size:18px;line-height:1.4;color:var(--ink-2);margin-top:22px;max-width:46ch;font-weight:400}
+  .hero-tag b{color:var(--ink);font-weight:500}
+
+  .hero-side{font-family:var(--mono);font-size:11px;line-height:1.7;color:var(--ink-2);display:flex;flex-direction:column;gap:18px}
+  .hero-side .headshot{margin-bottom:6px}
+  .hero-side .block{}
+  .hero-side .block b{display:block;font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:5px}
+  .hero-side .avail{display:inline-flex;align-items:center;gap:8px;border:1px solid var(--ink);padding:6px 10px;border-radius:2px;font-size:10.5px;font-weight:500;color:var(--ink);text-transform:uppercase;letter-spacing:0.1em;width:fit-content}
+  .hero-side .avail::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 3px var(--accent-tint)}
+
+  /* glance row */
+  .glance-row{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:48px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)}
+  .glance-cell{padding:20px 22px;border-left:1px solid var(--rule)}
+  .glance-cell:first-child{border-left:0}
+  .glance-cell .k{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:8px}
+  .glance-cell .v{font-size:14.5px;line-height:1.45;color:var(--ink);font-weight:500}
+  .glance-cell .v small{font-weight:400;color:var(--ink-2);font-size:13px}
+
+  /* selected works strip */
+  .works-strip{margin-top:64px}
+  .works-strip-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px}
+  .works-strip-head h3{font-size:22px;font-weight:600;letter-spacing:-0.02em}
+  .works-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
+  .work-card{padding:24px 22px 26px;border-left:1px solid var(--rule);position:relative;text-decoration:none;color:inherit;transition:background .2s;display:flex;flex-direction:column;gap:14px;min-height:260px}
+  .work-card:first-child{border-left:0}
+  .work-card:hover{background:var(--paper-2)}
+  .work-card .no{font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:0.12em;font-weight:500}
+  .work-card .cat{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-top:auto}
+  .work-card .title{font-size:18px;line-height:1.2;font-weight:500;letter-spacing:-0.015em;color:var(--ink)}
+  .work-card .stat{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);border-top:1px solid var(--rule);padding-top:10px;margin-top:6px}
+  .work-card .stat b{color:var(--accent-deep);font-weight:600}
+
+  /* ============ PROJECT HEADER ============ */
+  .project-hd{display:grid;grid-template-columns:1fr;gap:0;margin-bottom:48px;position:relative}
+  .project-hd .topline{display:flex;justify-content:space-between;align-items:baseline;padding-bottom:12px;border-bottom:1px solid var(--ink);font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .project-hd .topline b{color:var(--ink);font-weight:600}
+  .project-hd h2{font-size:54px;line-height:1.02;letter-spacing:-0.025em;font-weight:600;margin-top:26px;max-width:18ch}
+  .project-hd .sub{font-size:18px;line-height:1.45;color:var(--ink-2);margin-top:18px;max-width:58ch;font-weight:400}
+  .project-hd .sub b{color:var(--ink);font-weight:500}
+  .project-hd .meta{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:36px;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+  .project-hd .meta > div{padding:14px 0;padding-right:24px;border-left:1px solid var(--rule);padding-left:18px;font-family:var(--mono);font-size:11px;color:var(--ink-2);line-height:1.5}
+  .project-hd .meta > div:first-child{border-left:0;padding-left:0}
+  .project-hd .meta b{display:block;font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;margin-bottom:4px}
+  .project-hd .tags{margin-top:24px;display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-family:var(--mono);font-size:10.5px;letter-spacing:0.04em;padding:5px 10px;border:1px solid var(--rule-2);border-radius:2px;color:var(--ink-2);background:var(--paper);font-weight:500}
+
+  /* ============ KEY METRIC STRIP ============ */
+  .metric-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--ink);margin:40px 0 48px 0;background:var(--paper-2)}
+  .metric{padding:22px 22px;border-left:1px solid var(--rule)}
+  .metric:first-child{border-left:0}
+  .metric .k{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;margin-bottom:12px;font-weight:500}
+  .metric .v{font-size:38px;line-height:1;letter-spacing:-0.03em;font-weight:600;color:var(--ink)}
+  .metric .v small{font-family:var(--sans);font-size:14px;color:var(--ink-2);font-weight:500;margin-left:4px;letter-spacing:0}
+  .metric .delta{font-family:var(--mono);font-size:11px;color:var(--accent-deep);margin-top:10px;font-weight:500;display:flex;align-items:center;gap:6px}
+  .metric .delta .neutral{color:var(--muted)}
+  .metric .delta::before{content:"▲";font-size:9px;color:var(--accent);transform:translateY(-1px)}
+  .metric .delta.neutral::before{content:"·";color:var(--muted);font-size:14px;transform:translateY(-3px)}
+  .metric .delta.down::before{content:"▼"}
+
+  /* ============ NARRATIVE BLOCKS ============ */
+  .narrative{display:grid;grid-template-columns:140px 1fr;gap:48px;margin:48px 0;align-items:start}
+  .narrative .col-h{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);padding-top:6px;border-top:2px solid var(--ink);font-weight:600}
+  .narrative .col-h .sub{display:block;font-size:9px;color:var(--muted);font-weight:500;margin-top:3px;letter-spacing:0.1em}
+  .narrative .body{font-size:15.5px;line-height:1.6;color:var(--ink-2);max-width:62ch}
+  .narrative .body p{max-width:none}
+  .narrative .body p + p{margin-top:14px}
+  .narrative .body strong{color:var(--ink);font-weight:600}
+  .narrative .body h4{font-size:20px;font-weight:500;letter-spacing:-0.015em;color:var(--ink);margin-bottom:8px;line-height:1.25}
+
+  /* small numbered list (problem → action → result) */
+  .par-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--ink);background:var(--paper);margin:32px 0}
+  .par-cell{padding:22px 24px;border-left:1px solid var(--rule)}
+  .par-cell:first-child{border-left:0}
+  .par-cell .lab{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;display:flex;justify-content:space-between;margin-bottom:10px}
+  .par-cell .lab .n{color:var(--accent)}
+  .par-cell h5{font-size:17px;font-weight:500;letter-spacing:-0.015em;margin-bottom:8px;line-height:1.25}
+  .par-cell p{font-size:13.5px;line-height:1.55;color:var(--ink-2);max-width:none}
+
+  /* decision call-out */
+  .decision{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--ink);margin:32px 0;background:var(--paper)}
+  .decision > div{padding:24px 26px}
+  .decision .lhs{border-right:1px solid var(--ink);background:var(--paper-2)}
+  .decision .lab{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:500;display:flex;justify-content:space-between}
+  .decision .lab .n{color:var(--accent);font-weight:600}
+  .decision h5{font-size:21px;line-height:1.22;letter-spacing:-0.015em;margin:0 0 10px 0;font-weight:500}
+  .decision p{font-size:14px;line-height:1.55;color:var(--ink-2);max-width:none}
+  .decision .impact{display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;margin-top:6px;font-size:13.5px}
+  .decision .impact div{padding-left:14px;border-left:2px solid var(--accent);line-height:1.4;color:var(--ink-2)}
+  .decision .impact div strong{color:var(--ink);font-weight:600}
+
+  /* ============ FIGURE / IMAGE SLOTS ============ */
+  .figure{margin:36px 0;position:relative}
+  .figure .cap{margin-top:0;font-family:var(--mono);font-size:10.5px;letter-spacing:0.06em;color:var(--muted);display:flex;gap:14px;align-items:baseline;line-height:1.5;border-top:1px solid var(--rule);padding-top:10px}
+  .figure .cap .dwg-n{color:var(--accent);font-weight:600;letter-spacing:0.12em;text-transform:uppercase;min-width:54px}
+  .figure .cap b{color:var(--ink);font-weight:600;letter-spacing:0.1em;text-transform:uppercase;font-size:10px}
+  .figrow{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+  .figrow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+  image-slot{display:block;background:transparent;position:relative;overflow:hidden}
+  /* Kill the component's default dashed ring — we don't want any frame around images */
+  image-slot::part(ring){border:0}
+  .figure .slot-wrap{position:relative;padding:0;background:transparent;border:0;height:320px}
+  .figure .slot-wrap image-slot{width:100%;height:100%;background:transparent}
+  /* Taller for wide single-column figures */
+  .slot-wrap.tall{height:460px}
+  /* Bigger for the 3-step assembly sequence so each step reads at a glance */
+  .figrow3 .slot-wrap{height:340px}
+  .figure .slot-wrap.tight{padding:0;height:auto;background:transparent;border:0}
+
+  /* ============ EXPLODED VIEW WITH NUMBERED CALLOUTS ============ */
+  .exploded-fig{display:grid;grid-template-columns:1fr 0.85fr;gap:32px;align-items:start;background:#fff;border:1px solid var(--rule-2);padding:24px}
+  .ex-image{position:relative;width:100%;max-width:540px;margin:0 auto;aspect-ratio:3/4;background:#fff}
+  .ex-image img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain}
+  .pin{position:absolute;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:rgba(42,111,219,0.82);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:600;box-shadow:0 0 0 2px rgba(255,255,255,0.85);z-index:3;pointer-events:none}
+  .ex-legend{margin:0;padding:0;list-style:none;font-family:var(--mono);font-size:12px;line-height:1.45;display:flex;flex-direction:column;border-top:1px solid var(--ink)}
+  .ex-legend > .head{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:10px 4px;font-weight:600;border-bottom:1px solid var(--rule)}
+  .ex-legend > li{padding:11px 4px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:center;color:var(--ink-2)}
+  .ex-legend > li:last-child{border-bottom:0}
+  .ex-legend > li .n{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-deep);font-weight:600;font-size:11px;line-height:1}
+  .ex-legend > li .name{color:var(--ink);font-weight:500;font-size:13px;letter-spacing:0.01em}
+
+  /* ============ PLOT OVERLAYS (label unlabeled charts ourselves) ============ */
+  .plot-wrap{position:relative;background:#fff;border:1px solid var(--rule-2);overflow:hidden}
+  .plot-wrap img{display:block;width:100%;height:auto}
+  .plot-anno{position:absolute;font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:0.02em;color:var(--accent-deep);background:#fff;border:1px solid var(--accent);padding:5px 9px;line-height:1.25;white-space:nowrap;z-index:3;box-shadow:0 1px 4px rgba(0,0,0,0.08)}
+  .plot-anno.dim{color:var(--ink-2);border-color:var(--ink-2);background:var(--paper)}
+  .plot-anno b{color:var(--accent-deep);font-weight:600;margin-right:6px}
+  .plot-anno.dim b{color:var(--ink)}
+  .plot-dot{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--accent);border:3px solid #fff;box-shadow:0 0 0 1.5px var(--accent),0 1px 4px rgba(0,0,0,0.2);transform:translate(-50%,-50%);z-index:3}
+  .plot-dot.dim{background:var(--ink);box-shadow:0 0 0 1.5px var(--ink),0 1px 4px rgba(0,0,0,0.2)}
+  .plot-line{position:absolute;border-top:1.5px dashed var(--accent);z-index:2;transform-origin:left center}
+  .plot-line.dim{border-top:1.5px dashed var(--ink-2)}
+  .plot-hline{position:absolute;height:0;border-top:1.5px dashed var(--accent);z-index:2}
+  .plot-hline.dim{border-color:var(--ink-2)}
+
+  /* ============ HEADSHOT ============ */
+  .headshot{width:100%;max-width:230px;aspect-ratio:3/4;background:var(--paper-2);border:1px solid var(--rule-2);overflow:hidden;position:relative}
+  .headshot image-slot{width:100%;height:100%}
+
+  /* dimension markers around figures */
+  .dim-h{height:14px;display:flex;align-items:center;justify-content:space-between;font-family:var(--mono);font-size:9.5px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;padding:0 4px}
+  .dim-h::before, .dim-h::after{content:"";flex:0 0 18px;height:1px;background:var(--rule-2);position:relative}
+  .dim-h::before{margin-right:8px}
+  .dim-h::after{margin-left:8px}
+  .dim-h .label{flex:1;text-align:center;display:flex;align-items:center;gap:8px;justify-content:center;border-bottom:1px dashed var(--rule-2);padding-bottom:1px}
+
+  /* ============ SPEC TABLE ============ */
+  table.spec{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:20px;background:var(--paper)}
+  table.spec th, table.spec td{padding:12px 14px;text-align:left;border-bottom:1px solid var(--rule)}
+  table.spec th{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);font-weight:500;border-bottom:1px solid var(--ink);background:var(--paper-2)}
+  table.spec td:first-child{font-weight:500;color:var(--ink)}
+  table.spec td.note{color:var(--muted);font-style:italic}
+  table.spec tr.selected td{background:var(--accent-tint)}
+  table.spec tr.selected td:first-child{position:relative;padding-left:26px}
+  table.spec tr.selected td:first-child::before{content:"";position:absolute;left:14px;top:50%;transform:translateY(-50%);width:6px;height:6px;border-radius:50%;background:var(--accent)}
+
+  /* ============ BAR CHART ============ */
+  .bars{margin-top:18px}
+  .bar{display:grid;grid-template-columns:110px 1fr 80px;gap:14px;align-items:center;padding:9px 0;border-bottom:1px solid var(--rule);font-family:var(--mono);font-size:11px}
+  .bar:last-child{border-bottom:0}
+  .bar .lab{color:var(--ink-2);text-transform:uppercase;letter-spacing:0.08em;font-weight:500}
+  .bar .track{height:8px;background:var(--paper-2);position:relative;border:1px solid var(--rule-2)}
+  .bar .fill{position:absolute;left:0;top:0;bottom:0;background:var(--ink)}
+  .bar.sel .fill{background:var(--accent)}
+  .bar .val{text-align:right;color:var(--ink);font-weight:600}
+
+  /* ============ FLOW DIAGRAM ============ */
+  .flow{display:flex;flex-direction:column;gap:6px;font-family:var(--mono);font-size:11px;margin-top:18px;max-width:340px}
+  .flow .node{padding:10px 14px;border:1px solid var(--rule-2);background:var(--paper);text-align:center;letter-spacing:0.08em;text-transform:uppercase;font-weight:500}
+  .flow .node.hi{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .flow .node.accent{border:1px solid var(--accent);color:var(--accent-deep);background:var(--accent-tint)}
+  .flow .arrow{text-align:center;color:var(--muted);font-size:11px;line-height:1}
+
+  /* ============ CALLOUT ============ */
+  .callout{border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);padding:22px 0;margin:40px 0;display:grid;grid-template-columns:160px 1fr;gap:48px;align-items:center}
+  .callout .label{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  .callout .text{font-size:20px;line-height:1.35;color:var(--ink);max-width:50ch;font-weight:400;letter-spacing:-0.01em}
+  .callout .text b{font-weight:600}
+
+  /* ============ OUTCOMES ============ */
+  .outcomes{margin-top:40px;border-top:2px solid var(--ink);padding-top:22px;display:grid;grid-template-columns:140px 1fr;gap:48px}
+  .outcomes .col-h{font-family:var(--mono);font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink);font-weight:600}
+  .outcomes ul{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:12px 28px}
+  .outcomes li{font-size:14px;line-height:1.5;color:var(--ink-2);position:relative;padding-left:22px}
+  .outcomes li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:1px;background:var(--accent)}
+  .outcomes li strong{color:var(--ink);font-weight:600}
+
+  /* ============ FOLIO (page number top-right of each section) ============ */
+  .folio{position:absolute;top:18px;right:56px;font-family:var(--mono);font-size:10px;letter-spacing:0.14em;color:var(--muted);text-transform:uppercase;font-weight:500;z-index:2}
+
+  /* ============ FOOTER ============ */
+  footer{padding:64px 0;border-top:2px solid var(--ink);position:relative;z-index:1;margin-top:48px}
+  .footer-grid{display:grid;grid-template-columns:160px 1fr 360px;gap:48px;align-items:start}
+  .footer-tag{font-size:38px;line-height:1.05;letter-spacing:-0.025em;max-width:14ch;font-weight:500}
+  .footer-tag .accent{color:var(--accent)}
+  .footer-meta{font-family:var(--mono);font-size:11.5px;line-height:1.8;color:var(--ink-2)}
+  .footer-meta b{font-weight:500;color:var(--ink);letter-spacing:0.06em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:4px}
+  .footer-meta a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--rule-2)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 980px){
+    .frame{padding:0 28px}
+    .topbar-inner{padding:10px 28px;gap:14px}
+    .topbar nav{display:none}
+    .hero{grid-template-columns:1fr;gap:32px}
+    .headshot{max-width:200px}
+    .hero-name{font-size:64px}
+    .project-hd h2{font-size:36px}
+    .glance-row{grid-template-columns:1fr 1fr}
+    .works-grid{grid-template-columns:1fr 1fr}
+    .metric-strip,.par-grid{grid-template-columns:1fr 1fr}
+    .narrative,.outcomes,.callout,.footer-grid{grid-template-columns:1fr;gap:18px}
+    .outcomes ul{grid-template-columns:1fr}
+    .figrow,.figrow3,.decision,.exploded-fig{grid-template-columns:1fr}
+    .decision .lhs{border-right:0;border-bottom:1px solid var(--ink)}
+    .folio{right:28px}
+    .project-hd .meta{grid-template-columns:1fr 1fr}
+  }
+
+  /* ============ PRINT ============ */
+  @media print{
+    @page{size:letter;margin:0.5in}
+    body::before{display:none}
+    .topbar{display:none}
+    section{padding:0;border-top:0;page-break-before:always;page-break-inside:auto}
+    section:first-of-type{page-break-before:auto}
+    .frame{padding:0;max-width:none}
+    .cover{padding:0;min-height:auto}
+    .hero-name{font-size:80px}
+    .project-hd h2{font-size:42px}
+    .metric-strip{margin:24px 0}
+    .figure,.decision,.par-grid,.metric-strip,.callout{break-inside:avoid}
+    body{font-size:11.5px}
+    .folio{position:static;text-align:right;margin-bottom:6px}
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ TOP NAV ============ -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="who">Diego Rodriguez</span>
+    <span class="sep">Project Portfolio · 2026</span>
+    <nav>
+      <a href="#cover" data-nav>Overview</a>
+      <a href="#p1" data-nav>01 · Otoscope</a>
+      <a href="#p2" data-nav>02 · Swerve-Drive</a>
+      <a href="#p3" data-nav>03 · Gear Reducer</a>
+      <a href="#p4" data-nav>04 · CO₂ Sensor</a>
+      <a href="#how" data-nav>How I Work</a>
+    </nav>
+  </div>
+</div>
+
+<main class="frame">
+
+<!-- ============ COVER / OVERVIEW (single-page introduction) ============ -->
+<section id="cover" class="cover" data-section="Overview">
+  <div style="position:relative">
+    <div class="folio" style="top:24px">01 · Overview</div>
+  </div>
+
+  <div style="height:60px"></div>
+
+  <div class="cover-rule">
+    <span><b>Project Portfolio</b></span>
+    <span class="line"></span>
+    <span>Selected Works 2023 – 2026</span>
+    <span class="line"></span>
+    <span style="text-align:right">Mechanical Engineering</span>
+  </div>
+
+  <div class="hero">
+    <div>
+      <div class="eyebrow" style="margin-bottom:16px">A portfolio of mechanical engineering work by</div>
+      <h1 class="hero-name">Diego<br>Rodriguez<span class="accent-dot">.</span></h1>
+      <p class="hero-tag">Mechanical engineer drawn to physical products that have to work in the place they're used — a teaching otoscope in a vet lab, a rover in the Utah desert, a CO₂ alert in a hibernation cold room. I treat user testing as a design tool, not a checkbox; most of what I ship was shaped by something I learned holding the prototype.</p>
+    </div>
+    <div class="hero-side">
+      <div class="headshot">
+        <div class="hs-empty" style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;line-height:1.5;color:var(--muted)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Graduation photo</span></div>
+      </div>
+      <div class="block">
+        <b>Discipline</b>
+        Mechanical Engineering · B.S. May 2026<br>
+        University of Wisconsin–Madison
+      </div>
+      <div class="block">
+        <b>Location</b>
+        Minnetonka, MN<br>
+        Open to Minneapolis–Saint Paul
+      </div>
+      <div class="block">
+        <b>Contact</b>
+        <a href="mailto:diegov.rodriguezeng@gmail.com" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule-2)">diegov.rodriguezeng@gmail.com</a><br>
+        <a href="tel:+19523343763" style="color:var(--ink);text-decoration:none;border-bottom:1px solid var(--rule-2)">(952) 334-3763</a><br>
+        <a href="https://linkedin.com/in/diego-rodriguez-134454329" style="color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--rule-2)">linkedin.com/in/diego-rodriguez</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- At-a-glance facts strip -->
+  <div class="glance-row">
+    <div class="glance-cell">
+      <div class="k">Focus</div>
+      <div class="v">Product Design · Human-Centered Design · Design for Manufacturing</div>
+    </div>
+    <div class="glance-cell">
+      <div class="k">Technical</div>
+      <div class="v">SolidWorks · Prototyping · EES / Python · Technical Drawings</div>
+    </div>
+    <div class="glance-cell">
+      <div class="k">Strengths</div>
+      <div class="v">Collaboration · Iteration · Empathy</div>
+    </div>
+    <div class="glance-cell">
+      <div class="k">Target</div>
+      <div class="v">Medical Devices · Product Development · Design Engineering</div>
+    </div>
+  </div>
+
+  <!-- Selected works strip -->
+  <div class="works-strip">
+    <div class="works-strip-head">
+      <h3>Selected Works <span style="color:var(--muted);font-weight:400">— 04 Projects</span></h3>
+      <div class="dwg">Index · 2023–2026</div>
+    </div>
+    <div class="works-grid">
+      <a class="work-card" href="#p1">
+        <div class="no">P · 01</div>
+        <div class="title">Veterinary Video Otoscope Housing</div>
+        <div class="stat"><b>6 units</b> delivered to UW Vet Med</div>
+        <div class="cat">MEDICAL DEVICE · PRODUCT DEVELOPMENT</div>
+      </a>
+      <a class="work-card" href="#p2">
+        <div class="no">P · 02</div>
+        <div class="title">Wisconsin Robotics Swerve-Drive System</div>
+        <div class="stat"><b>12th / 34</b> teams at URC · SF 2.08</div>
+        <div class="cat">Robotics · Mechanical Design</div>
+      </a>
+      <a class="work-card" href="#p3">
+        <div class="no">P · 03</div>
+        <div class="title">Two-Stage Gear Reducer + ML Optimization</div>
+        <div class="stat"><b>2,500-design</b> sweep via ML surrogate</div>
+        <div class="cat">Analytical Design · Python</div>
+      </a>
+      <a class="work-card" href="#p4">
+        <div class="no">P · 04</div>
+        <div class="title">CO₂ Alert System for Hibernation Research</div>
+        <div class="stat"><b>9.84 s</b> avg. alert latency, n=10</div>
+        <div class="cat">Research Tool · Client-Facing</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECT 01 — OTOSCOPE ============ -->
+<section id="p1" data-section="01 · Otoscope">
+  <div class="folio">02 · Project 01</div>
+
+  <div class="project-hd">
+    <div class="topline">
+      <span><b>Project 01</b></span>
+      <span>Medical Device · Veterinary Training</span>
+      <span>DWG-01 · 2025–2026</span>
+    </div>
+    <h2>Veterinary Video Otoscope Housing.</h2>
+    <p class="sub">Redesigned a flimsy training prototype into a durable, weighted teaching tool for UW–Madison veterinary labs — approaching the handfeel of the Welch Allyn clinical instrument (≈ 0.87 lb) that students will use in practice. <b>Six production units delivered</b> across three prototype iterations.</p>
+
+    <div class="meta">
+      <div><b>Client</b>UW–Madison School of Veterinary Medicine</div>
+      <div><b>Team</b>4 students + faculty</div>
+      <div><b>My Role</b>Mechanical designer · machinist · tester</div>
+      <div><b>Output</b>6 units · ≈ $180 / unit · 40–50 students per lab</div>
+    </div>
+
+    <div class="tags">
+      <span class="tag">SolidWorks</span><span class="tag">3D Printing</span><span class="tag">Lathe Work</span><span class="tag">Cable Routing</span><span class="tag">Design for Manufacturing</span><span class="tag">User Testing</span>
+    </div>
+  </div>
+
+  <div class="metric-strip">
+    <div class="metric">
+      <div class="k">Handle Diameter</div>
+      <div class="v">30<small>mm</small></div>
+      <div class="delta neutral">Matches Welch Allyn (≈ 1.18&nbsp;in)</div>
+    </div>
+    <div class="metric">
+      <div class="k">Device Weight</div>
+      <div class="v">1.1<small>lb</small></div>
+      <div class="delta neutral">+0.23 lb over Welch Allyn target (0.87 lb)</div>
+    </div>
+    <div class="metric">
+      <div class="k">Cost / Unit</div>
+      <div class="v">$180</div>
+      <div class="delta neutral">vs. ≈ $500 commercial otoscope</div>
+    </div>
+    <div class="metric">
+      <div class="k">Production</div>
+      <div class="v">6<small>units</small></div>
+      <div class="delta neutral">Shipped to clinical lab</div>
+    </div>
+  </div>
+
+  <!-- Hero figure: before / after -->
+  <div class="figure">
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/otoscope-bme.jpg" alt="Before — original BME prototype" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n" style="height: 32px; letter-spacing: 1.3px; line-height: 1.5">FIG 01.1</span><b>Before</b><span>Original BME video prototype — 0.31 lb, bulky, plastic split shell</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/otoscope-hero.jpg" alt="After — final assembled trainer" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 01.2</span><b>After</b><span>Final trainer — 1.1 lb knurled steel housing · camera · supplemental LED · external charging</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Exploded view with numbered callouts overlay -->
+  <div class="figure">
+    <div class="dim-h"><span></span><span class="label">System Architecture · Exploded View · 8 components</span><span></span></div>
+    <div class="exploded-fig">
+      <div class="ex-image">
+        <img src="assets/otoscope-exploded-raw.jpg" alt="Exploded view of the final video otoscope assembly" style="padding: 0px">
+        <span class="pin" data-layout-id="pin-1" style="left:36%;top:6.2%">1</span>
+        <span class="pin" data-layout-id="pin-2" style="left:35.5%;top:14%">2</span>
+        <span class="pin" data-layout-id="pin-3" style="left:32%;top:22%">3</span>
+        <span class="pin" data-layout-id="pin-4" style="left:65%;top:10%">4</span>
+        <span class="pin" data-layout-id="pin-5" style="left:29.5%;top:30.5%">5</span>
+        <span class="pin" data-layout-id="pin-6" style="left:34.5%;top:53%">6</span>
+        <span class="pin" data-layout-id="pin-7" style="left:33%;top:78%">7</span>
+        <span class="pin" data-layout-id="pin-8" style="left:33%;top:95.2%">8</span>
+      </div>
+      <ol class="ex-legend">
+        <div class="head">Bill of Materials</div>
+        <li><span class="n">1</span><span class="name">Supplemental LED light</span></li>
+        <li><span class="n">2</span><span class="name">3D-printed otoscope head</span></li>
+        <li><span class="n">3</span><span class="name">Bebird wireless camera module</span></li>
+        <li><span class="n">4</span><span class="name">Disposable speculum</span></li>
+        <li><span class="n" style="font-size: 11px">5</span><span class="name">Supplemental light battery</span></li>
+        <li><span class="n">6</span><span class="name">Machined knurled steel handle</span></li>
+        <li><span class="n">7</span><span class="name">USB-C charging extension w/ rotating insert</span></li>
+        <li><span class="n">8</span><span class="name">Machined threaded end cap</span></li>
+      </ol>
+    </div>
+    <div class="cap"><span class="dwg-n">FIG 01.3</span><b>Exploded View</b><span>Final assembly — eight parts simplified to a sleek profile that matches the Welch Allyn clinical instrument</span></div>
+  </div>
+
+  <!-- Problem · Action · Result narrative -->
+  <div class="par-grid">
+    <div class="par-cell">
+      <div class="lab"><span>Problem</span><span class="n">01</span></div>
+      <h5>Plastic prototype felt nothing like a clinical otoscope.</h5>
+      <p>Faculty wanted students to feel a real otoscope — weight, grip, balance — while seeing live video. The Welch Allyn reference weighs <strong>~0.87 lb</strong>; the existing BME prototype weighed <strong>0.31 lb</strong>, with a plastic split-shell housing, no charging access, and a beam-splitter optical path that bulked out the head.</p>
+    </div>
+    <div class="par-cell">
+      <div class="lab"><span>Action</span><span class="n">02</span></div>
+      <h5>Pivoted to a sourced camera and a stock steel handle.</h5>
+      <p>Replaced the team's first attempt (a custom ESP32 + beam splitter) with the compact Bebird camera. Used knurled steel dumbbell handles — hollowed on the lathe, threads preserved — as the housing. Designed a 3D-printed head and a rotating insert that lets the cable spin while the end cap threads on.</p>
+    </div>
+    <div class="par-cell">
+      <div class="lab"><span>Result</span><span class="n">03</span></div>
+      <h5>A 1.1 lb knurled instrument shipping in lab.</h5>
+      <p>Three iterations of CAD, bench, and cadaver testing. Six production units at ≈ $180 each. Diameter and length match the Welch Allyn; weight lands 0.23 lb over target — faculty accepted the trade for grip durability. Supplemental LED added after cadaver testing revealed a brightness gap CAD couldn’t.</p>
+    </div>
+  </div>
+
+  <!-- Key Decision 01 -->
+  <div class="decision">
+    <div class="lhs">
+      <div class="lab"><span>Key Decision</span><span class="n">№ 01</span></div>
+      <h5>Use a knurled steel dumbbell handle as the housing base.</h5>
+      <p>Stock parts gave us the clinical grip texture, the weight, and reusable threads — without custom machining the most ergonomically important surface.</p>
+    </div>
+    <div>
+      <div class="lab"><span>Impact</span></div>
+      <div class="impact">
+        <div><strong>0.31 lb → 1.1 lb</strong> — within 0.23 lb of the 0.87 lb clinical target</div>
+        <div>Knurled grip without custom CNC work</div>
+        <div>Threaded ends reused for end-cap assembly</div>
+        <div>Durable for repeated lab use</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Steel handle figure supporting Decision 01 -->
+  <div class="figure">
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/otoscope-handle1.jpg" alt="Knurled steel handle stock" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 01.4</span><b>Handle Stock</b><span>Sourced knurled steel dumbbell handle — reused threads and factory knurl</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/otoscope-lathe.jpg" alt="Lathe setup during handle fabrication" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 01.5</span><b>Fabrication</b><span>Lathe setup used to hollow the handle to 0.8125” ID for camera + battery</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Decision 02 -->
+  <div class="decision">
+    <div class="lhs">
+      <div class="lab"><span>Key Decision</span><span class="n">№ 02</span></div>
+      <h5>A rotating 3D-printed insert that decouples cable from cap.</h5>
+      <p>The charging cable had to pass through the end cap. The end cap had to rotate to thread. Those two facts together would have ruined the cable on every reassembly.</p>
+    </div>
+    <div>
+      <div class="lab"><span>Impact</span></div>
+      <div class="impact">
+        <div>No cable twist during assembly</div>
+        <div><strong>External charging</strong> — no disassembly required</div>
+        <div>Improved serviceability and cable durability</div>
+        <div>Compact handle packaging preserved</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Assembly sequence -->
+  <div class="figure">
+    <div class="dim-h"><span></span><span class="label">Assembly Sequence · 3 Steps</span><span></span></div>
+    <div class="figrow3">
+      <div>
+        <div class="slot-wrap"><img src="assets/otoscope-charge1.jpg" alt="01 · Cable + 3D-printed insert" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">01</span><b>Insert</b></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/otoscope-charge2.jpg" alt="02 · Steel end cap installed" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">02</span><b>End Cap</b></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/otoscope-charge3.jpg" alt="03 · External charging" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">03</span><b>Charging</b></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    <div class="col-h">Late-Stage Find<span class="sub">User Testing</span></div>
+    <div class="body">
+      <h4>Canine cadaver testing exposed a lighting problem CAD couldn’t.</h4>
+      <p>The Bebird camera’s built-in light was bright enough on a human ear. Inside a real canine ear canal, the geometry blocked ambient light and the image went dark. We added a supplemental LED and battery — with no extra internal space, no obstruction of the camera path, and no compromise to grip diameter.</p>
+      <p>I selected the LED and a battery that fit alongside the existing charging cable, routed wires around the camera’s field of view, and packaged the additional system without growing the device. The clinical handfeel had to survive.</p>
+    </div>
+  </div>
+
+  <!-- LED + View Through pair -->
+  <div class="figure">
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/otoscope-led.jpg" alt="Supplemental LED integrated in the head" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 01.6</span><b>LED Integration</b><span>Supplemental LED packaged inside the 3D-printed head</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/otoscope-view.jpg" alt="View through the otoscope head" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 01.7</span><b>View Through Head</b><span>Camera + light alignment verified through the head</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="label">Takeaway</div>
+    <div class="text">Realistic testing surfaced problems CAD and bench tests missed — lighting, packaging, usability — <b>before</b> we committed to producing six units.</div>
+  </div>
+
+  <div class="outcomes">
+    <div class="col-h">Final Outcomes</div>
+    <ul>
+      <li><strong>3 prototype iterations</strong> — CAD, bench, cadaver</li>
+      <li>Handle diameter <strong>30 mm</strong> — matches Welch Allyn</li>
+      <li>Device weight <strong>1.1 lb</strong> — 0.23 lb over the 0.87 lb target; faculty accepted the added grip mass</li>
+      <li>Supplemental LED added after cadaver testing</li>
+      <li>External charging integrated through the end cap</li>
+      <li><strong>6 production units</strong> · 40–50 students per lab</li>
+    </ul>
+  </div>
+
+
+  <div class="narrative" style="margin-top:48px">
+    <div class="col-h">In Hindsight<span class="sub">What I'd Change</span></div>
+    <div class="body">
+      <p>Committing to the stock dumbbell handle locked in the geometry — and the mass. A thinner-walled custom steel sleeve (or a deeper lathe bore) could have hit the 0.87 lb target on the nose; I'd run that study earlier next time, before sourcing the handle stock.</p>
+      <p>I'd also pull the cadaver test forward by a full iteration. The LED gap we found was the kind of thing only a real ear canal reveals — and we caught it late enough that the supplemental LED had to be packaged into a head that wasn't designed for it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECT 02 — DRIVETRAIN ============ -->
+<section id="p2" data-section="02 · Drivetrain">
+  <div class="folio">03 · Project 02</div>
+
+  <div class="project-hd">
+    <div class="topline">
+      <span><b>Project 02</b></span>
+      <span>Robotics · Competition Drivetrain</span>
+      <span>DWG-02 · 2024–2025</span>
+    </div>
+    <h2>Wisconsin Robotics Swerve-Drive System.</h2>
+    <p class="sub">Designed an integrated tube-and-gearbox connection for the swerve modules on Wisconsin Robotics’ ~50 lb URC competition rover. <b>Eliminated module flex, raised the swerve motor above terrain, and enabled reliable in-place turning.</b> The completed rover placed <b>12th of 34 teams</b> at the University Rover Challenge.</p>
+
+    <div class="meta">
+      <div><b>Team</b>Wisconsin Robotics · Drivetrain Subteam</div>
+      <div><b>My Contribution</b>Owned the tube-to-gearbox interface — concept sketches, integrated CAD, three-material EES study, presentation to the drivetrain subteam</div>
+      <div><b>Vehicle</b>~50 lb URC competition rover</div>
+      <div><b>Status</b>Installed · Competed · 12 / 34 at URC</div>
+    </div>
+
+    <div class="tags">
+      <span class="tag">SolidWorks / Onshape</span><span class="tag">EES Stress Analysis</span><span class="tag">Material Selection</span><span class="tag">Design for Assembly</span><span class="tag">3D Printing</span><span class="tag">Team Review</span>
+    </div>
+  </div>
+
+  <div class="metric-strip">
+    <div class="metric">
+      <div class="k">URC Result</div>
+      <div class="v">12<small>/ 34</small></div>
+      <div class="delta neutral">University Rover Challenge</div>
+    </div>
+    <div class="metric">
+      <div class="k">Final Safety Factor</div>
+      <div class="v">2.08</div>
+      <div class="delta">vs. 1.80 target</div>
+    </div>
+    <div class="metric">
+      <div class="k">Selected Material</div>
+      <div class="v" style="font-size:30px">6061<small>Al</small></div>
+      <div class="delta neutral">Weight + cost optimum</div>
+    </div>
+    <div class="metric">
+      <div class="k">Outcome</div>
+      <div class="v" style="font-size:28px">Competed</div>
+      <div class="delta neutral">Installed on final rover</div>
+    </div>
+  </div>
+
+  <div class="figure">
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/rover-before.jpg" alt="Previous rover / clamp-style connection" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 02.1</span><b>Previous</b><span>Previous rover — clamp-style connector flexed under load</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/rover-final.jpg" alt="Final rover with integrated swerve modules" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 02.2</span><b>Final</b><span>New rover — integrated tube-and-gearbox swerve modules · 12th at URC</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="par-grid">
+    <div class="par-cell">
+      <div class="lab"><span>Problem</span><span class="n">01</span></div>
+      <h5>The tube–gearbox interface was the weakest link.</h5>
+      <p>The clamp-style connector flexed under load — modules wobbled, alignment stacked up, the swerve motor sat low enough to take hits on climbs, and in-place turning was unreliable. Steering the rover at competition would not survive that interface.</p>
+    </div>
+    <div class="par-cell">
+      <div class="lab"><span>Action</span><span class="n">02</span></div>
+      <h5>Integrate the shaft receiver into the gearbox housing.</h5>
+      <p>Sketched clamp and integrated concepts. Picked the integrated version, modified the CAD, ran EES on the connecting shaft across three materials against a SF &gt; 1.8 target, prototyped in 3D print, and presented the design to the drivetrain team.</p>
+    </div>
+    <div class="par-cell">
+      <div class="lab"><span>Result</span><span class="n">03</span></div>
+      <h5>6061 aluminum, SF 2.08, 12th at URC.</h5>
+      <p>Installed on every swerve module of the competition rover. In-place turning held. Modules stopped wobbling. The motor stayed clean. The team finished <strong>12th of 34</strong> at the University Rover Challenge.</p>
+    </div>
+  </div>
+
+  <!-- Concept exploration: clamp vs integrated -->
+  <div class="figure">
+    <div class="dim-h"><span></span><span class="label">Concept Exploration · Clamp → Integrated</span><span></span></div>
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/rover-clamp.jpg" alt="First clamp concept — abandoned" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 02.3</span><b>Clamp Concept</b><span>First concept — abandoned: clamp added machining complexity, kept the stack-up</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/rover-sketch.jpg" alt="Integrated gearbox connection sketch" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 02.4</span><b>Integrated Concept</b><span>Selected — shaft receiver built directly into the gearbox housing</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="decision">
+    <div class="lhs">
+      <div class="lab"><span>Key Decision</span><span class="n">№ 01</span></div>
+      <h5>Build the shaft receiver directly into the gearbox housing.</h5>
+      <p>Replacing the clamp bracket with integrated geometry removed the stack-up that was causing the flex — and simplified the bolt pattern in the process.</p>
+    </div>
+    <div>
+      <div class="lab"><span>Impact</span></div>
+      <div class="impact">
+        <div>Eliminated the clamp bracket</div>
+        <div>Removed alignment stack-up</div>
+        <div><strong>Stiffer interface</strong> at the shaft-to-gearbox joint</div>
+        <div>Direct bolted assembly</div>
+        <div>Swerve motor raised above debris path</div>
+        <div>Reliable in-place turning at competition</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="narrative">
+    <div class="col-h">Material Study<span class="sub">EES · Von Mises</span></div>
+    <div class="body">
+      <h4>Picking the connecting shaft material.</h4>
+      <p>Used EES to evaluate the shaft under combined rover weight, motor torque, impact, and shear loading. Compared three candidate materials against a Von Mises safety-factor criterion (target &gt; 1.8).</p>
+
+      <table class="spec">
+        <thead><tr><th>Material</th><th>Safety Factor</th><th>Decision</th></tr></thead>
+        <tbody>
+          <tr class="selected"><td>6061 Aluminum</td><td>2.08</td><td class="note">Selected — met SF target, lowest weight + cost</td></tr>
+          <tr><td>4130 Steel</td><td>3.45</td><td class="note">Stronger — but heavier, more expensive</td></tr>
+          <tr><td>Titanium</td><td>6.59</td><td class="note">Highest strength — cost-prohibitive</td></tr>
+        </tbody>
+      </table>
+
+      <div class="bars" style="margin-top:24px">
+        <div class="bar sel">
+          <span class="lab">6061 Al</span>
+          <span class="track"><span class="fill" style="width:31%"></span></span>
+          <span class="val">SF 2.08</span>
+        </div>
+        <div class="bar">
+          <span class="lab">4130 Steel</span>
+          <span class="track"><span class="fill" style="width:52%"></span></span>
+          <span class="val">SF 3.45</span>
+        </div>
+        <div class="bar">
+          <span class="lab">Titanium</span>
+          <span class="track"><span class="fill" style="width:100%"></span></span>
+          <span class="val">SF 6.59</span>
+        </div>
+        <div class="bar" style="border-top:1px dashed var(--rule-2);padding-top:14px;margin-top:6px">
+          <span class="lab" style="color:var(--accent-deep)">Target</span>
+          <span class="track" style="background:transparent;border:0"><span class="fill" style="width:27%;background:transparent;border-right:1px dashed var(--accent)"></span></span>
+          <span class="val" style="color:var(--accent-deep)">SF 1.80</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Real EES safety factor plot with our own labels -->
+  <div class="figure">
+    <div class="plot-wrap">
+      <img src="assets/rover-sfplot-raw.png" alt="Safety factor vs. shaft inner diameter">
+      <!-- Target SF=1.8 dashed horizontal line spanning the plot area -->
+      <span class="plot-hline dim" data-layout-id="sf-hline" style="left:14%;right:5%;top:72.4%"></span>
+      <span class="plot-anno dim" data-layout-id="sf-target" style="left:15.5%;top:71%"><b>Target</b>SF ≥ 1.80</span>
+      <!-- 6061 Al selected point at SF=2.08 -->
+      <span class="plot-dot" data-layout-id="sf-dot" style="left:86%;top:70.2%"></span>
+      <span class="plot-anno" data-layout-id="sf-selected" style="left:55%;top:55%"><b>Selected</b>6061 Al · SF 2.08</span>
+    </div>
+    <div class="cap"><span class="dwg-n">FIG 02.5</span><b>EES Plot</b><span>Safety factor vs. shaft inner diameter for 6061 Al, 4130 steel, and titanium — 6061 selected at SF 2.08, above the 1.80 target</span></div>
+  </div>
+
+  <div class="figure">
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/rover-cad.jpg" alt="Final CAD model — gearbox connection" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 02.6</span><b>CAD</b><span>Final integrated tube-and-gearbox connection</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/rover-proto.jpg" alt="3D-printed prototype validating fit" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 02.7</span><b>Prototype</b><span>3D print used to verify fit before machining</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="label">In Competition</div>
+    <div class="text">Installed on every swerve module of the competition rover. In-place turning held. Modules stopped wobbling. The motor stayed clean. <b>The team finished 12th of 34 at URC.</b></div>
+  </div>
+</section>
+
+<!-- ============ PROJECT 03 — GEAR REDUCER ============ -->
+<section id="p3" data-section="03 · Gear Reducer">
+  <div class="folio">04 · Project 03</div>
+
+  <div class="project-hd">
+    <div class="topline">
+      <span><b>Project 03</b></span>
+      <span>Analytical Design · Optimization</span>
+      <span>DWG-03 · 2025</span>
+    </div>
+    <h2>Two-Stage Gear Reducer + ML Optimization.</h2>
+    <p class="sub">A 4.5:1 reverted reducer designed by hand to AGMA / Buckingham — then re-evaluated against 2,500 candidates by a Random Forest surrogate I built. <b>Found a feasible variant 12% lighter — at the cost of fatigue-life margin (SF_gear 1.31 → 1.22).</b></p>
+
+    <div class="meta">
+      <div><b>Course</b>ME 342 · Design of Machine Components</div>
+      <div><b>My Contribution</b>Led shaft + gear analysis (EES, AGMA, Buckingham); built the Python sweep + Random Forest surrogate pipeline solo</div>
+      <div><b>Team</b>4 students</div>
+      <div><b>Extension</b>Python + scikit-learn (self-initiated)</div>
+    </div>
+
+    <div class="tags">
+      <span class="tag">EES</span><span class="tag">AGMA / Buckingham</span><span class="tag">SolidWorks</span><span class="tag">Python</span><span class="tag">scikit-learn</span><span class="tag">Random Forest</span>
+    </div>
+  </div>
+
+  <div class="metric-strip">
+    <div class="metric">
+      <div class="k">Reduction Ratio</div>
+      <div class="v">4.5:1</div>
+      <div class="delta neutral">Two-stage reverted</div>
+    </div>
+    <div class="metric">
+      <div class="k">Reliability Target</div>
+      <div class="v">99.9<small>%</small></div>
+      <div class="delta">Achieved</div>
+    </div>
+    <div class="metric">
+      <div class="k">Mass Reduction</div>
+      <div class="v">12<small>%</small></div>
+      <div class="delta down">7.19 → 6.34 kg · trade: SF_gear 1.31 → 1.22</div>
+    </div>
+    <div class="metric">
+      <div class="k">Designs Evaluated</div>
+      <div class="v">2,500</div>
+      <div class="delta neutral">Random Forest surrogate</div>
+    </div>
+  </div>
+
+  <div class="figure">
+    <div class="slot-wrap tall" style="max-width:760px;margin:0 auto"><img src="assets/gear-assembly.png" alt="Two-stage gear reducer assembly" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+    <div class="cap" style="max-width:760px;margin:10px auto 0 auto"><span class="dwg-n">FIG 03.1</span><b>Assembly Layout</b><span>Motor connection · input · counter · output shaft arrangement</span></div>
+  </div>
+
+  <!-- Shaft CAD pair -->
+  <div class="figure">
+    <div class="dim-h"><span></span><span class="label">Shaft CAD · Input + Counter</span><span></span></div>
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/gear-input-cad.jpg" alt="Input shaft CAD" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 03.2</span><b>Input Shaft</b><span>SolidWorks model — motor coupling, pinion seat, bearing journals</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/gear-counter-cad.jpg" alt="Counter shaft CAD" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 03.3</span><b>Counter Shaft</b><span>SolidWorks model — carries both stages, keyways for pinion and gear</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Engineering drawings pair -->
+  <div class="figure">
+    <div class="dim-h"><span></span><span class="label">Engineering Drawings · Manufacturing-Ready</span><span></span></div>
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/gear-input-dwg.png" alt="Input shaft drawing" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 03.4</span><b>Input Drawing</b><span>Input shaft — dimensions, tolerances, keyway</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/gear-drawing.jpg" alt="Counter shaft engineering drawing" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 03.5</span><b>Counter Drawing</b><span>Counter shaft — dimensions, tolerances, keyway</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="par-grid">
+    <div class="par-cell">
+      <div class="lab"><span>Problem</span><span class="n">01</span></div>
+      <h5>Design a 4.5:1 reducer that meets strength, fatigue, and manufacturing.</h5>
+      <p>Team brief: hit reduction ratio, meet 99.9% reliability, balance reliability against weight and manufacturability, produce ready-to-fab CAD and drawings.</p>
+    </div>
+    <div class="par-cell">
+      <div class="lab"><span>Action</span><span class="n">02</span></div>
+      <h5>Hand-analyzed shafts and gears. Then automated the sweep.</h5>
+      <p>Sized shafts (EES) and gears (AGMA + Buckingham). Selected 1045 HR steel shafts and AISI 4140 gears. Then converted the EES design into a Python analytical model and trained a Random Forest surrogate to predict performance.</p>
+    </div>
+    <div class="par-cell">
+      <div class="lab"><span>Result</span><span class="n">03</span></div>
+      <h5>Baseline shipped. Then found 12% lighter still feasible.</h5>
+      <p>Baseline met every spec. Surrogate-driven sweep across 2,500 candidates surfaced a variant at <strong>6.34 kg</strong> (vs. 7.19 kg baseline), holding SF_shaft ≥ 1.5 and SF_gear ≥ 1.2.</p>
+    </div>
+  </div>
+
+  <div class="narrative">
+    <div class="col-h">Mechanical Design<span class="sub">Baseline</span></div>
+    <div class="body">
+      <h4>Hand-analyzed shafts and gears.</h4>
+      <p>Performed shaft force, bending, and torsional analysis in EES; sized minimum shaft diameters from fatigue and stress criteria; sized gears using AGMA and Buckingham; selected materials by strength, fatigue life, and manufacturability; validated the assembly in SolidWorks.</p>
+      <p><strong>Baseline result.</strong> 1045 HR steel shafts (7 / 9 / 10 mm) and AISI 4140 normalized gears (35 mm pinion, 22.5 mm gear face widths). Minimum safety factors of <strong>1.58 (shaft)</strong> and <strong>1.31 (gear)</strong>. Manufacturing-ready CAD and drawings produced.</p>
+    </div>
+  </div>
+
+  <div class="figure">
+    <div class="slot-wrap tall" style="max-width:820px;margin:0 auto"><img src="assets/gear-fbd.jpg" alt="Free-body diagram of reducer shafts" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+    <div class="cap" style="max-width:820px;margin:10px auto 0 auto"><span class="dwg-n">FIG 03.6</span><b>Free-Body Diagram</b><span>Reducer shafts — EES computed bending, torsional, and combined stresses at critical sections</span></div>
+  </div>
+
+  <div class="callout">
+    <div class="label">Self-Initiated Extension</div>
+    <div class="text">The team’s design met strength. It wasn’t optimized for weight. <b>I built a Python pipeline to find out how much we left on the table.</b></div>
+  </div>
+
+  <div class="narrative">
+    <div class="col-h">Optimization<span class="sub">Python · ML</span></div>
+    <div class="body">
+      <h4>Sweep the design space, train a surrogate.</h4>
+      <p>Converted the EES design into a Python analytical model, performed an automated sweep across 2,500 candidate reducers, and trained a Random Forest surrogate to predict performance from the five geometric inputs (<span class="mono">d_in, d_co, d_out, b_p, b_g</span>) without re-running the full analysis on every candidate.</p>
+
+      <div class="flow">
+        <div class="node">EES Design</div><div class="arrow">↓</div>
+        <div class="node">Python Analytical Model</div><div class="arrow">↓</div>
+        <div class="node">Parameter Sweep · 2,500</div><div class="arrow">↓</div>
+        <div class="node accent">Random Forest Surrogate</div><div class="arrow">↓</div>
+        <div class="node hi">Rapid Performance Prediction</div>
+      </div>
+
+      <h4 style="margin-top:28px">Result: 12% lighter, still inside spec.</h4>
+      <table class="spec">
+        <thead><tr><th>Design</th><th>Mass</th><th>SF Shaft</th><th>SF Gear</th></tr></thead>
+        <tbody>
+          <tr><td>Baseline</td><td>7.19 kg</td><td>1.58</td><td>1.31</td></tr>
+          <tr class="selected"><td>Optimized</td><td>6.34 kg</td><td>1.58</td><td>1.22</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:18px">The surrogate replaced a per-design analytical evaluation with a near-instant prediction — fast enough to sweep <strong>2,500 candidates in seconds</strong> instead of hours. The trade-off is explicit: gear safety factor dropped from <strong>1.31 → 1.22</strong>, closer to the 1.20 constraint, so the optimized variant has less fatigue-life margin than the baseline. Both stay inside the spec; the baseline is the safer ship.</p>
+    </div>
+  </div>
+
+  <div class="figure">
+    <div class="plot-wrap" style="max-width:820px;margin:0 auto">
+      <img src="assets/gear-mass-sf-raw.png" alt="Mass vs minimum gear safety factor">
+      <!-- Baseline: 7.19 kg, SF 1.31 -->
+      <span class="plot-dot dim" data-layout-id="gear-base-dot" style="left:38%;top:58%"></span>
+      <span class="plot-anno dim" data-layout-id="gear-base-anno" style="left:44%;top:42%"><b>Baseline</b>7.19 kg · SF 1.31</span>
+      <!-- Optimized: 6.34 kg, SF 1.22 -->
+      <span class="plot-dot" data-layout-id="gear-opt-dot" style="left:14%;top:93%"></span>
+      <span class="plot-anno" data-layout-id="gear-opt-anno" style="left:19%;top:76%"><b>Optimized</b>6.34 kg · SF 1.22 · –12%</span>
+    </div>
+    <div class="cap" style="max-width:820px;margin:10px auto 0 auto"><span class="dwg-n">FIG 03.7</span><b>Optimization Plot</b><span>Total mass vs. minimum gear safety factor across the feasible design sweep — the weight / durability trade-off frontier</span></div>
+  </div>
+
+  <div class="outcomes">
+    <div class="col-h">Key Takeaways</div>
+    <ul>
+      <li>Converted EES design → Python analytical model</li>
+      <li>Swept <strong>2,500 candidate designs</strong></li>
+      <li>Surrogate cut per-design eval ~1000× — enabling the 2,500 sweep</li>
+      <li>Found a feasible design <strong>12% lighter</strong></li>
+      <li>Held shaft / gear constraints (gear margin tightened)</li>
+      <li>Demonstrated ML for engineering design eval</li>
+    </ul>
+  </div>
+
+
+  <div class="narrative" style="margin-top:48px">
+    <div class="col-h">In Hindsight<span class="sub">What I'd Change</span></div>
+    <div class="body">
+      <p>The Random Forest surrogate fits a deterministic analytical model — that's why it scores so cleanly. A second-order polynomial response surface would have done the same job with a fraction of the code; the ML framing is real, but it's the <strong>sweep</strong>, not the model class, that did the work. I'd lead with that next time.</p>
+      <p>I'd also run a finite-life fatigue check on the optimized variant before recommending it. Dropping SF_gear from 1.31 to 1.22 stays inside the static constraint, but it shortens the design life — and the team's brief didn't quantify that trade. Owning that question is the next step.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECT 04 — CO2 SENSOR ============ -->
+<section id="p4" data-section="04 · CO₂ Sensor">
+  <div class="folio">05 · Project 04</div>
+
+  <div class="project-hd">
+    <div class="topline">
+      <span><b>Project 04</b></span>
+      <span>Research Tool · Animal Physiology</span>
+      <span>DWG-04 · 2022–2023</span>
+    </div>
+    <h2>CO₂ Alert System for Hibernation Research.</h2>
+    <p class="sub">A noninvasive CO₂ monitoring enclosure that alerts researchers when hibernating ground squirrels re-enter interbout euthermia. <b>Delivered under budget, working in cold storage.</b></p>
+
+    <div class="meta">
+      <div><b>Client</b>UW Retinal Regeneration Research · Fauna Bio</div>
+      <div><b>Reviewers</b>Dr. Sprenger · Dr. Sajdak</div>
+      <div><b>My Role</b>Mechanical designer · client lead</div>
+      <div><b>Output</b>Working prototype · validated in cold storage</div>
+    </div>
+
+    <div class="tags">
+      <span class="tag">SolidWorks</span><span class="tag">Arduino</span><span class="tag">Client Communication</span><span class="tag">Material Selection</span><span class="tag">Prototype Testing</span>
+    </div>
+  </div>
+
+  <div class="metric-strip">
+    <div class="metric">
+      <div class="k">CO₂ Threshold</div>
+      <div class="v">5,000<small>ppm</small></div>
+      <div class="delta neutral">Tested across 10 trials</div>
+    </div>
+    <div class="metric">
+      <div class="k">Alert Latency</div>
+      <div class="v">9.84<small>s</small></div>
+      <div class="delta neutral">avg., n = 10</div>
+    </div>
+    <div class="metric">
+      <div class="k">Cost / Unit</div>
+      <div class="v">$149<small>.20</small></div>
+      <div class="delta neutral">vs. $300 budget · 50% under</div>
+    </div>
+    <div class="metric">
+      <div class="k">Operating Temp</div>
+      <div class="v">3–10<small>°C</small></div>
+      <div class="delta neutral">Refrigerated habitat</div>
+    </div>
+  </div>
+
+  <div class="figure">
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/co2-cad.jpg" alt="SolidWorks model — enclosure, mesh, sensor" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 04.1</span><b>CAD</b><span>Removable lid · sensor placement · mesh guard · air-pump connection</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/co2-hero.jpg" alt="Final integrated prototype" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 04.2</span><b>Prototype</b><span>Acrylic enclosure · Arduino + WiFi alert · air pump</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="par-grid">
+    <div class="par-cell">
+      <div class="lab"><span>Problem</span><span class="n">01</span></div>
+      <h5>Researchers had no way to know when squirrels woke.</h5>
+      <p>Manual monitoring was inefficient — animals were housed remotely in dark, refrigerated habitats. Any sensor system had to be noninvasive and survive the cold without disturbing hibernation.</p>
+    </div>
+    <div class="par-cell">
+      <div class="lab"><span>Action</span><span class="n">02</span></div>
+      <h5>Acrylic enclosure with a mesh-guarded CO₂ sensor.</h5>
+      <p>Modeled the enclosure, lid, sensor placement, and air pump in SolidWorks. Selected acrylic and the wire mesh guard. Load-tested the mesh under 1 lb (≈ 3× squirrel weight). Wired the Arduino threshold-and-email logic.</p>
+    </div>
+    <div class="par-cell">
+      <div class="lab"><span>Result</span><span class="n">03</span></div>
+      <h5>9.84 s avg. alert. $149.20 / unit against a $300 budget.</h5>
+      <p>Delivered working prototype to Dr. Sprenger, Dr. Sajdak, and Fauna Bio. Threshold tested at 5,000 ppm across 10 trials. Mesh held its load with no visible stress.</p>
+    </div>
+  </div>
+
+  <div class="decision">
+    <div class="lhs">
+      <div class="lab"><span>Validation</span></div>
+      <h5>Alert latency averaged 9.84 seconds across 10 trials.</h5>
+      <p>From CO₂ threshold crossing to email-in-inbox — measured under the actual refrigerated condition the system would operate in.</p>
+    </div>
+    <div>
+      <div class="lab"><span>System Spec</span></div>
+      <div class="impact">
+        <div>Threshold: <strong>5,000 ppm</strong></div>
+        <div>Avg. latency: <strong>9.84 s (n = 10)</strong></div>
+        <div>Mesh holds 1 lb · no visible stress</div>
+        <div>Final cost: <strong>$149.20 / unit</strong> vs. $300 budget</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Response time chart + Mesh test -->
+  <div class="figure">
+    <div class="figrow">
+      <div>
+        <div class="slot-wrap"><img src="assets/co2-response.jpg" alt="Response time over 10 trials" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 04.3</span><b>Response Time</b><span>Breath → email alert latency across 10 trials · avg. 9.84 s</span></div>
+      </div>
+      <div>
+        <div class="slot-wrap"><img src="assets/co2-mesh.jpg" alt="Wire mesh strength test" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
+        <div class="cap"><span class="dwg-n">FIG 04.4</span><b>Mesh Test</b><span>Protective wire mesh under 1 lb load (≈3× squirrel weight) — no visible stress</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <div class="label">Takeaway</div>
+    <div class="text">My first full client-facing prototype — translating a research need into a low-cost physical design with environmental constraints and validated alert performance.</div>
+  </div>
+</section>
+
+<!-- ============ HOW I WORK ============ -->
+<section id="how" data-section="How I Work">
+  <div class="folio">06 · How I Work</div>
+
+  <div class="project-hd">
+    <div class="topline">
+      <span><b>How I Work</b></span>
+      <span>Four habits behind the projects above</span>
+      <span>REF · 2023–2026</span>
+    </div>
+    <h2>The instincts<br>I bring to a team.</h2>
+  </div>
+
+  <div class="narrative" style="margin-top:8px">
+    <div class="col-h">Strengths<span class="sub">In Practice</span></div>
+    <div class="body">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px 40px">
+        <div><strong>Bias toward real-world testing.</strong> The cadaver test on the otoscope and the CO₂ latency trials in a cold room both came out of the same instinct: build it, then break it in the place it'll actually live.</div>
+        <div><strong>Comfortable owning analysis.</strong> EES, AGMA, Buckingham, hand-derived FBDs, and Python sweeps — I'll show my work and defend the assumptions in review.</div>
+        <div><strong>Translate between disciplines.</strong> I've worked with veterinarians, animal physiologists, software-leaning roboticists, and ME peers; I try to learn the other side's vocabulary before pushing a design.</div>
+        <div><strong>Take initiative beyond the brief.</strong> The Python optimization on the gear reducer wasn't in the assignment. It was the right next question to ask.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="frame">
+    <div class="footer-grid">
+      <div class="dwg" style="padding-top:8px;border-top:1px solid var(--ink);font-weight:600;color:var(--ink)">End</div>
+      <div>
+        <div class="footer-tag">Let's build<br>something<span class="accent">.</span></div>
+        <p style="margin-top:22px;font-size:15.5px;line-height:1.55;color:var(--ink-2);max-width:42ch">Open to full-time mechanical engineering and product development roles starting summer 2026. The fastest way to reach me is email — I reply within a day.</p>
+        <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:10px">
+          <a href="mailto:diegov.rodriguezeng@gmail.com" style="display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);padding:11px 18px;text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink)">Email me →</a>
+          <a href="tel:+19523343763" style="display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);padding:11px 18px;text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink)">(952) 334-3763</a>
+          <a href="https://linkedin.com/in/diego-rodriguez-134454329" style="display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);padding:11px 18px;text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink)">LinkedIn ↗</a>
+          <a href="Portfolio-print.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);padding:11px 18px;text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink)">Résumé / Print ↓</a>
+        </div>
+      </div>
+      <div class="footer-meta">DIEGO RODRIGUEZ
+Mechanical Engineering · B.S. May 2026
+University of Wisconsin–Madison
+
+
+LOCATION
+Minnetonka, MN
+Open to Minneapolis–Saint Paul
+
+
+AVAILABILITY
+Full-time · summer 2026
+</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll-spy nav
+  const links = document.querySelectorAll('.topbar nav a[data-nav]');
+  const map = new Map();
+  links.forEach(a => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) map.set(id, a);
+  });
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const id = e.target.id;
+        links.forEach(l => l.classList.remove('active'));
+        const link = map.get(id);
+        if (link) link.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+  map.forEach((_, id) => {
+    const el = document.getElementById(id);
+    if (el) io.observe(el);
+  });
+
+  // Smooth scroll (no scrollIntoView)
+  links.forEach(a => a.addEventListener('click', (ev) => {
+    const id = a.getAttribute('href').slice(1);
+    const el = document.getElementById(id);
+    if (el) {
+      ev.preventDefault();
+      const y = el.getBoundingClientRect().top + window.scrollY - 56;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+      history.replaceState(null, '', '#' + id);
+    }
+  }));
+
+  // Also wire work-card anchors
+  document.querySelectorAll('.work-card[href^="#"]').forEach(a => {
+    a.addEventListener('click', (ev) => {
+      const id = a.getAttribute('href').slice(1);
+      const el = document.getElementById(id);
+      if (el) {
+        ev.preventDefault();
+        const y = el.getBoundingClientRect().top + window.scrollY - 56;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        history.replaceState(null, '', '#' + id);
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
