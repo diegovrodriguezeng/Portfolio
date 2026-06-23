@@ -78,7 +78,7 @@
 
   .rail-bottom{padding:16px 16px 22px;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:14px}
   .rail-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border:1px solid rgba(255,255,255,0.22);border-radius:6px;color:#fff;text-decoration:none;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;transition:background-color .18s ease,border-color .18s ease}
-  .rail-btn:hover{background:var(--rail-accent);border-color:var(--rail-accent);color:#0E1014}
+  .rail-btn:hover{background:rgba(255,255,255,0.10);border-color:rgba(255,255,255,0.40);color:#fff}
   .rail-btn:focus-visible{outline:2px solid var(--rail-accent);outline-offset:2px}
   .rail-contact{display:flex;gap:16px}
   .rail-contact a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;transition:color .18s ease}
@@ -316,6 +316,29 @@
   .footer-meta b{font-weight:500;color:var(--ink);letter-spacing:0.06em;text-transform:uppercase;font-size:10px;display:block;margin-bottom:4px}
   .footer-meta a{color:var(--accent-deep);text-decoration:none;border-bottom:1px solid var(--rule-2)}
 
+  /* ============ DOWNLOAD CTAS (résumé + portfolio) ============ */
+  .dl-actions{margin-top:26px;display:flex;flex-wrap:wrap;gap:12px}
+  .dl-btn{display:inline-flex;align-items:center;gap:13px;padding:18px 30px;border:1px solid transparent;border-radius:3px;font-family:var(--mono);text-decoration:none;line-height:1;transition:transform .18s ease,box-shadow .18s ease,background-color .18s ease,border-color .18s ease}
+  .dl-btn svg{width:20px;height:20px;flex:0 0 auto}
+  .dl-btn .dl-txt{display:flex;flex-direction:column;gap:4px;text-align:left}
+  .dl-btn .dl-main{font-size:14px;letter-spacing:0.08em;text-transform:uppercase;font-weight:600}
+  .dl-btn .dl-sub{font-size:9.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:500;opacity:0.72}
+  .dl-btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(14,16,20,0.16)}
+  .dl-btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .dl-resume{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .dl-resume:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+  .dl-portfolio{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .dl-portfolio:hover{background:#000;border-color:#000}
+
+  .footer-links{margin-top:18px;display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center}
+  .footer-links a{font-family:var(--mono);font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;border-bottom:1px solid var(--rule-2);padding-bottom:2px;transition:color .15s ease,border-color .15s ease}
+  .footer-links a:hover{color:var(--accent-deep);border-color:var(--accent-deep)}
+
+  /* rail download pair: primary (résumé) + secondary (portfolio) */
+  .rail-dl{display:flex;flex-direction:column;gap:8px}
+  .rail-btn-primary{background:var(--rail-accent);color:#0E1014;border-color:var(--rail-accent)}
+  .rail-btn-primary:hover{background:#8FB9FF;border-color:#8FB9FF;color:#0E1014}
+
   /* ============ RESPONSIVE ============ */
   @media (max-width: 980px){
     .frame{padding:0 28px}
@@ -409,7 +432,10 @@
     <a href="#how" data-nav><span class="rn-num">05</span><span class="rn-label">How I Work</span></a>
   </nav>
   <div class="rail-bottom">
-    <a href="Portfolio-print.html" class="rail-btn">Résumé / Print ↓</a>
+    <div class="rail-dl">
+      <a href="files/resume.pdf" download="Diego Rodriguez — Resume.pdf" class="rail-btn rail-btn-primary">Résumé ↓</a>
+      <a href="files/portfolio.pdf" download="Diego Rodriguez — Portfolio.pdf" class="rail-btn">Portfolio ↓</a>
+    </div>
     <div class="rail-contact">
       <a href="mailto:diegov.rodriguezeng@gmail.com">Email</a>
       <a href="https://linkedin.com/in/diego-rodriguez-134454329" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -1269,11 +1295,20 @@
       <div>
         <div class="footer-tag">Let's build<br>something<span class="accent">.</span></div>
         <p style="margin-top:22px;font-size:15.5px;line-height:1.55;color:var(--ink-2);max-width:42ch">Open to full-time mechanical engineering and product development roles starting summer 2026. The fastest way to reach me is email — I reply within a day.</p>
-        <div style="margin-top:24px;display:flex;flex-wrap:wrap;gap:10px">
-          <a href="mailto:diegov.rodriguezeng@gmail.com" style="display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:var(--paper);padding:11px 18px;text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink)">Email me →</a>
-          <a href="tel:+19523343763" style="display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);padding:11px 18px;text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink)">(952) 334-3763</a>
-          <a href="https://linkedin.com/in/diego-rodriguez-134454329" style="display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);padding:11px 18px;text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink)">LinkedIn ↗</a>
-          <a href="Portfolio-print.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--paper);color:var(--ink);padding:11px 18px;text-decoration:none;font-family:var(--mono);font-size:11px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;border:1px solid var(--ink)">Résumé / Print ↓</a>
+        <div class="dl-actions">
+          <a class="dl-btn dl-resume" href="files/resume.pdf" download="Diego Rodriguez — Resume.pdf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span class="dl-txt"><span class="dl-main">Download Résumé</span><span class="dl-sub">PDF</span></span>
+          </a>
+          <a class="dl-btn dl-portfolio" href="files/portfolio.pdf" download="Diego Rodriguez — Portfolio.pdf">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span class="dl-txt"><span class="dl-main">Download Portfolio</span><span class="dl-sub">Full site · PDF</span></span>
+          </a>
+        </div>
+        <div class="footer-links">
+          <a href="mailto:diegov.rodriguezeng@gmail.com">Email me →</a>
+          <a href="tel:+19523343763">(952) 334-3763</a>
+          <a href="https://linkedin.com/in/diego-rodriguez-134454329" target="_blank" rel="noopener">LinkedIn ↗</a>
         </div>
       </div>
       <div class="footer-meta">DIEGO RODRIGUEZ
