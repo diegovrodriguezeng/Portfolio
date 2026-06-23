@@ -22,6 +22,9 @@
     --accent-tint:#E1ECFB;
     --sans:'Geist','Helvetica Neue',Helvetica,Arial,sans-serif;
     --mono:'JetBrains Mono',ui-monospace,Menlo,monospace;
+    --rail-w:248px;
+    --rail-bg:#0E1014;
+    --rail-accent:#6AA2FF;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:400;font-size:14.5px;line-height:1.55;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"ss01","cv11"}
@@ -50,18 +53,45 @@
   a{color:var(--accent-deep);text-decoration-thickness:1px;text-underline-offset:3px}
   ::selection{background:var(--accent);color:#fff}
 
-  /* ---------- TOP NAV ---------- */
-  .topbar{position:sticky;top:0;z-index:50;background:rgba(241,241,237,0.88);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
-  .topbar-inner{max-width:1240px;margin:0 auto;padding:12px 56px;display:flex;align-items:center;gap:32px;font-family:var(--mono);font-size:11px;letter-spacing:0.06em;text-transform:uppercase}
-  .topbar .who{color:var(--ink);font-weight:500;display:flex;align-items:center;gap:10px}
-  .topbar .who::before{content:"";width:8px;height:8px;background:var(--accent);border-radius:50%;display:inline-block}
-  .topbar .sep{color:var(--muted)}
-  .topbar nav{margin-left:auto;display:flex;gap:22px}
-  .topbar nav a{color:var(--muted);text-decoration:none;position:relative;padding-bottom:2px;transition:color .15s;font-weight:500}
-  .topbar nav a:hover{color:var(--ink)}
-  .topbar nav a.active{color:var(--ink)}
-  .topbar nav a.active::after{content:"";position:absolute;left:0;right:0;bottom:-13px;height:2px;background:var(--accent)}
-  .topbar .pill{border:1px solid var(--rule-2);color:var(--ink-2);padding:5px 10px;border-radius:2px;font-size:10px;font-weight:500;background:var(--paper)}
+  /* ---------- LEFT SIDEBAR RAIL ---------- */
+  body{padding-left:var(--rail-w)}
+
+  .siderail{position:fixed;top:0;left:0;bottom:0;width:var(--rail-w);z-index:60;background:var(--rail-bg);color:#fff;display:flex;flex-direction:column;border-right:1px solid #000;font-family:var(--mono)}
+  .rail-top{padding:26px 22px 18px;border-bottom:1px solid rgba(255,255,255,0.08)}
+  .rail-brand{text-decoration:none;color:#fff;display:flex;flex-direction:column;gap:6px}
+  .rail-name{font-family:var(--sans);font-size:17px;font-weight:600;letter-spacing:-0.012em;display:flex;align-items:center;gap:9px}
+  .rail-name::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rail-accent);box-shadow:0 0 0 3px rgba(106,162,255,0.18);flex:0 0 auto}
+  .rail-role{font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:rgba(255,255,255,0.42);padding-left:17px}
+
+  .rail-nav{display:flex;flex-direction:column;padding:14px 12px;gap:2px;flex:1 1 auto}
+  .rail-nav a{position:relative;display:flex;align-items:center;gap:12px;padding:10px 12px 10px 16px;border-radius:6px;text-decoration:none;color:rgba(255,255,255,0.6);font-size:12.5px;letter-spacing:0.02em;transition:color .18s ease,background-color .18s ease,transform .18s ease}
+  .rail-nav a .rn-num{font-size:10px;color:rgba(255,255,255,0.32);letter-spacing:0.1em;transition:color .18s ease}
+  .rail-nav a .rn-label{white-space:nowrap}
+  .rail-nav a::before{content:"";position:absolute;left:0;top:50%;transform:translateY(-50%);width:3px;height:0;border-radius:3px;background:var(--rail-accent);transition:height .18s ease}
+  .rail-nav a:hover{color:#fff;background:rgba(255,255,255,0.06);transform:translateX(3px)}
+  .rail-nav a:hover .rn-num{color:var(--rail-accent)}
+  .rail-nav a:hover::before{height:18px}
+  .rail-nav a:focus-visible{outline:2px solid var(--rail-accent);outline-offset:2px}
+  .rail-nav a.active{color:#fff;background:rgba(106,162,255,0.12)}
+  .rail-nav a.active .rn-num{color:var(--rail-accent)}
+  .rail-nav a.active::before{height:62%}
+
+  .rail-bottom{padding:16px 16px 22px;border-top:1px solid rgba(255,255,255,0.08);display:flex;flex-direction:column;gap:14px}
+  .rail-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 12px;border:1px solid rgba(255,255,255,0.22);border-radius:6px;color:#fff;text-decoration:none;font-size:10.5px;letter-spacing:0.12em;text-transform:uppercase;font-weight:600;transition:background-color .18s ease,border-color .18s ease}
+  .rail-btn:hover{background:var(--rail-accent);border-color:var(--rail-accent);color:#0E1014}
+  .rail-btn:focus-visible{outline:2px solid var(--rail-accent);outline-offset:2px}
+  .rail-contact{display:flex;gap:16px}
+  .rail-contact a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;transition:color .18s ease}
+  .rail-contact a:hover{color:#fff}
+
+  /* scroll-progress line (sits above content, right of the rail) */
+  .scroll-progress{position:fixed;top:0;left:var(--rail-w);right:0;height:2px;z-index:65;background:transparent;pointer-events:none}
+  .scroll-progress > span{display:block;height:100%;width:0;background:var(--accent);transition:width .08s linear}
+
+  /* mobile top bar + hamburger (hidden on desktop) */
+  .mobilebar{display:none}
+  .rail-scrim{display:none}
+  .nav-toggle{display:none}
 
   /* ---------- CORNER BRACKETS (engineering drawing marks) ---------- */
   .bracketed{position:relative}
@@ -110,9 +140,10 @@
   .works-strip-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px}
   .works-strip-head h3{font-size:22px;font-weight:600;letter-spacing:-0.02em}
   .works-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
-  .work-card{padding:24px 22px 26px;border-left:1px solid var(--rule);position:relative;text-decoration:none;color:inherit;transition:background .2s;display:flex;flex-direction:column;gap:14px;min-height:260px}
+  .work-card{padding:24px 22px 26px;border-left:1px solid var(--rule);position:relative;text-decoration:none;color:inherit;transition:background .2s ease,transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column;gap:14px;min-height:260px}
   .work-card:first-child{border-left:0}
-  .work-card:hover{background:var(--paper-2)}
+  .work-card:hover{background:var(--paper-2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(14,16,20,0.08)}
+  .work-card:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
   .work-card .no{font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:0.12em;font-weight:500}
   .work-card .cat{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-top:auto}
   .work-card .title{font-size:18px;line-height:1.2;font-weight:500;letter-spacing:-0.015em;color:var(--ink)}
@@ -288,8 +319,25 @@
   /* ============ RESPONSIVE ============ */
   @media (max-width: 980px){
     .frame{padding:0 28px}
-    .topbar-inner{padding:10px 28px;gap:14px}
-    .topbar nav{display:none}
+    body{padding-left:0}
+    .scroll-progress{left:0}
+
+    /* mobile top bar */
+    .mobilebar{display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:60;padding:11px 20px;background:var(--rail-bg);color:#fff;font-family:var(--mono)}
+    .mobilebar .who{font-family:var(--sans);font-weight:600;font-size:15px;display:flex;align-items:center;gap:9px;color:#fff;text-decoration:none}
+    .mobilebar .who::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--rail-accent)}
+    .nav-toggle{display:inline-flex;flex-direction:column;justify-content:center;gap:5px;width:40px;height:34px;padding:0 9px;background:transparent;border:1px solid rgba(255,255,255,0.22);border-radius:6px;cursor:pointer}
+    .nav-toggle span{display:block;height:2px;width:100%;background:#fff;border-radius:2px;transition:transform .25s ease,opacity .2s ease}
+    body.nav-open .nav-toggle span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+    body.nav-open .nav-toggle span:nth-child(2){opacity:0}
+    body.nav-open .nav-toggle span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+
+    /* off-canvas drawer */
+    .siderail{transform:translateX(-100%);transition:transform .25s ease;width:min(290px,84vw);will-change:transform}
+    body.nav-open .siderail{transform:translateX(0);box-shadow:0 0 44px rgba(0,0,0,0.5)}
+    .rail-scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,0.45);opacity:0;pointer-events:none;transition:opacity .25s ease;z-index:55}
+    body.nav-open .rail-scrim{opacity:1;pointer-events:auto}
+
     .hero{grid-template-columns:1fr;gap:32px}
     .headshot{max-width:200px}
     .hero-name{font-size:64px}
@@ -309,7 +357,8 @@
   @media print{
     @page{size:letter;margin:0.5in}
     body::before{display:none}
-    .topbar{display:none}
+    body{padding-left:0}
+    .siderail,.mobilebar,.rail-scrim,.scroll-progress{display:none}
     section{padding:0;border-top:0;page-break-before:always;page-break-inside:auto}
     section:first-of-type{page-break-before:auto}
     .frame{padding:0;max-width:none}
@@ -321,25 +370,53 @@
     body{font-size:11.5px}
     .folio{position:static;text-align:right;margin-bottom:6px}
   }
+
+  /* ============ REDUCED MOTION ============ */
+  @media (prefers-reduced-motion: reduce){
+    *,*::before,*::after{transition-duration:0.01ms !important;animation-duration:0.01ms !important}
+    .rail-nav a:hover{transform:none}
+    .work-card:hover{transform:none}
+  }
 </style>
 </head>
 <body>
 
-<!-- ============ TOP NAV ============ -->
-<div class="topbar">
-  <div class="topbar-inner">
-    <span class="who">Diego Rodriguez</span>
-    <span class="sep">Project Portfolio · 2026</span>
-    <nav>
-      <a href="#cover" data-nav>Overview</a>
-      <a href="#p1" data-nav>01 · Otoscope</a>
-      <a href="#p2" data-nav>02 · Swerve-Drive</a>
-      <a href="#p3" data-nav>03 · Gear Reducer</a>
-      <a href="#p4" data-nav>04 · CO₂ Sensor</a>
-      <a href="#how" data-nav>How I Work</a>
-    </nav>
+<!-- ============ SCROLL PROGRESS ============ -->
+<div class="scroll-progress" aria-hidden="true"><span id="scrollbar"></span></div>
+
+<!-- ============ MOBILE TOP BAR ============ -->
+<header class="mobilebar">
+  <a href="#cover" class="who" data-nav>Diego Rodriguez</a>
+  <button class="nav-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="siderail">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ============ LEFT SIDEBAR NAV RAIL ============ -->
+<aside class="siderail" id="siderail">
+  <div class="rail-top">
+    <a class="rail-brand" href="#cover" data-nav>
+      <span class="rail-name">Diego Rodriguez</span>
+      <span class="rail-role">Project Portfolio · 2026</span>
+    </a>
   </div>
-</div>
+  <nav class="rail-nav" aria-label="Sections">
+    <a href="#cover" data-nav><span class="rn-num">00</span><span class="rn-label">Overview</span></a>
+    <a href="#p1" data-nav><span class="rn-num">01</span><span class="rn-label">Otoscope</span></a>
+    <a href="#p2" data-nav><span class="rn-num">02</span><span class="rn-label">Swerve-Drive</span></a>
+    <a href="#p3" data-nav><span class="rn-num">03</span><span class="rn-label">Gear Reducer</span></a>
+    <a href="#p4" data-nav><span class="rn-num">04</span><span class="rn-label">CO₂ Sensor</span></a>
+    <a href="#how" data-nav><span class="rn-num">05</span><span class="rn-label">How I Work</span></a>
+  </nav>
+  <div class="rail-bottom">
+    <a href="Portfolio-print.html" class="rail-btn">Résumé / Print ↓</a>
+    <div class="rail-contact">
+      <a href="mailto:diegov.rodriguezeng@gmail.com">Email</a>
+      <a href="https://linkedin.com/in/diego-rodriguez-134454329" target="_blank" rel="noopener">LinkedIn ↗</a>
+    </div>
+  </div>
+</aside>
+<div class="rail-scrim" id="railScrim" aria-hidden="true"></div>
 
 <main class="frame">
 
@@ -367,7 +444,7 @@
     </div>
     <div class="hero-side">
       <div class="headshot">
-        <div class="hs-empty" style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:14px;font-family:var(--mono);font-size:10.5px;letter-spacing:0.08em;text-transform:uppercase;line-height:1.5;color:var(--muted)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity:.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg><span>Graduation photo</span></div>
+        <img src="assets/headshot.jpg" alt="Diego Rodriguez in University of Wisconsin–Madison graduation cap and gown" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block">
       </div>
       <div class="block">
         <b>Discipline</b>
@@ -1217,10 +1294,25 @@ Full-time · summer 2026
 </footer>
 
 <script>
-  // Scroll-spy nav
-  const links = document.querySelectorAll('.topbar nav a[data-nav]');
+(function(){
+  const body = document.body;
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ---- mobile drawer ----
+  const toggle = document.getElementById('navToggle');
+  const scrim = document.getElementById('railScrim');
+  function setNav(open){
+    body.classList.toggle('nav-open', open);
+    if (toggle) toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  if (toggle) toggle.addEventListener('click', () => setNav(!body.classList.contains('nav-open')));
+  if (scrim) scrim.addEventListener('click', () => setNav(false));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') setNav(false); });
+
+  // ---- scroll-spy on the rail ----
+  const railLinks = Array.from(document.querySelectorAll('.rail-nav a[data-nav]'));
   const map = new Map();
-  links.forEach(a => {
+  railLinks.forEach(a => {
     const id = a.getAttribute('href').slice(1);
     const el = document.getElementById(id);
     if (el) map.set(id, a);
@@ -1229,42 +1321,45 @@ Full-time · summer 2026
     entries.forEach(e => {
       if (e.isIntersecting) {
         const id = e.target.id;
-        links.forEach(l => l.classList.remove('active'));
+        railLinks.forEach(l => { l.classList.remove('active'); l.removeAttribute('aria-current'); });
         const link = map.get(id);
-        if (link) link.classList.add('active');
+        if (link) { link.classList.add('active'); link.setAttribute('aria-current', 'true'); }
       }
     });
   }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
-  map.forEach((_, id) => {
-    const el = document.getElementById(id);
-    if (el) io.observe(el);
-  });
+  map.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
 
-  // Smooth scroll (no scrollIntoView)
-  links.forEach(a => a.addEventListener('click', (ev) => {
-    const id = a.getAttribute('href').slice(1);
-    const el = document.getElementById(id);
-    if (el) {
-      ev.preventDefault();
-      const y = el.getBoundingClientRect().top + window.scrollY - 56;
-      window.scrollTo({ top: y, behavior: 'smooth' });
-      history.replaceState(null, '', '#' + id);
-    }
-  }));
-
-  // Also wire work-card anchors
-  document.querySelectorAll('.work-card[href^="#"]').forEach(a => {
+  // ---- smooth scroll for in-page links (rail, mobile bar, work cards) ----
+  function offsetTop(){
+    const mb = document.querySelector('.mobilebar');
+    return (mb && getComputedStyle(mb).display !== 'none') ? mb.offsetHeight + 12 : 24;
+  }
+  document.querySelectorAll('a[data-nav], .work-card[href^="#"]').forEach(a => {
     a.addEventListener('click', (ev) => {
-      const id = a.getAttribute('href').slice(1);
-      const el = document.getElementById(id);
-      if (el) {
-        ev.preventDefault();
-        const y = el.getBoundingClientRect().top + window.scrollY - 56;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-        history.replaceState(null, '', '#' + id);
-      }
+      const href = a.getAttribute('href') || '';
+      if (!href.startsWith('#')) return;
+      const el = document.getElementById(href.slice(1));
+      if (!el) return;
+      ev.preventDefault();
+      const y = el.getBoundingClientRect().top + window.scrollY - offsetTop();
+      window.scrollTo({ top: y, behavior: prefersReduced ? 'auto' : 'smooth' });
+      history.replaceState(null, '', href);
+      setNav(false);
     });
   });
+
+  // ---- scroll progress bar ----
+  const bar = document.getElementById('scrollbar');
+  if (bar){
+    const update = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+  }
+})();
 </script>
 
 </body>
