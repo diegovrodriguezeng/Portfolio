@@ -254,13 +254,48 @@
   .exploded-fig{display:grid;grid-template-columns:1fr 0.85fr;gap:32px;align-items:start;background:#fff;border:1px solid var(--rule-2);padding:24px}
   .ex-image{position:relative;width:100%;max-width:540px;margin:0 auto;aspect-ratio:3/4;background:#fff}
   .ex-image img{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:contain}
-  .pin{position:absolute;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:rgba(42,111,219,0.82);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:600;box-shadow:0 0 0 2px rgba(255,255,255,0.85);z-index:3;pointer-events:none}
+  .pin{position:absolute;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:rgba(42,111,219,0.82);color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:600;box-shadow:0 0 0 2px rgba(255,255,255,0.85);z-index:3;cursor:pointer;border:0;padding:0;appearance:none;-webkit-appearance:none;transition:transform .15s ease,background-color .15s ease,box-shadow .15s ease}
+  .pin::after{content:"";position:absolute;inset:-9px;border-radius:50%}
+  .pin:hover,.pin:focus-visible,.pin.is-hl{background:var(--accent);transform:translate(-50%,-50%) scale(1.18);box-shadow:0 0 0 2px #fff,0 0 0 4px rgba(42,111,219,0.45);outline:none}
+  .pin.is-active{background:var(--accent-deep);transform:translate(-50%,-50%) scale(1.22);box-shadow:0 0 0 2px #fff,0 0 0 5px rgba(42,111,219,0.6)}
   .ex-legend{margin:0;padding:0;list-style:none;font-family:var(--mono);font-size:12px;line-height:1.45;display:flex;flex-direction:column;border-top:1px solid var(--ink)}
   .ex-legend > .head{font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding:10px 4px;font-weight:600;border-bottom:1px solid var(--rule)}
   .ex-legend > li{padding:11px 4px;border-bottom:1px solid var(--rule);display:grid;grid-template-columns:30px 1fr;gap:14px;align-items:center;color:var(--ink-2)}
   .ex-legend > li:last-child{border-bottom:0}
   .ex-legend > li .n{display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;border:1.5px solid var(--accent);color:var(--accent-deep);font-weight:600;font-size:11px;line-height:1}
   .ex-legend > li .name{color:var(--ink);font-weight:500;font-size:13px;letter-spacing:0.01em}
+
+  /* ===== interactive components (shared) ===== */
+  .ex-legend > .head{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .ex-legend > .head .hint{font-size:9px;letter-spacing:0.08em;color:var(--accent-deep);font-weight:600;text-transform:none}
+  .ex-legend > li{cursor:pointer;transition:background-color .15s ease;border-radius:2px}
+  .ex-legend > li:hover,.ex-legend > li.is-hl{background:var(--accent-tint)}
+  .ex-legend > li:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
+  .ex-legend > li.is-active .n{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .exploded-fig{position:relative}
+
+  /* image dim (click-away cue) */
+  .ex-dim{position:absolute;inset:0;z-index:2;background:rgba(14,16,20,0.07);opacity:0;transition:opacity .2s ease;pointer-events:none}
+  .exploded-fig.pinned .ex-dim{opacity:1;pointer-events:auto;cursor:pointer}
+
+  /* ===== STYLE: CARD ===== */
+  .ex-pop{position:absolute;z-index:30;width:256px;max-width:calc(100% - 24px);background:var(--paper);border:1px solid var(--ink);border-radius:9px;box-shadow:0 16px 44px rgba(14,16,20,0.24);font-family:var(--sans);opacity:0;transform:scale(.92);transform-origin:var(--ox,0%) 50%;transition:opacity .17s ease,transform .2s cubic-bezier(.2,.85,.3,1);pointer-events:none}
+  .ex-pop.show{opacity:1;transform:scale(1);pointer-events:auto}
+  .ex-pop-bar{display:flex;align-items:flex-start;gap:11px;padding:13px 12px 9px 14px}
+  .ex-pop-dot{flex:0 0 auto;width:23px;height:23px;border-radius:50%;background:var(--accent);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;font-weight:600;margin-top:1px}
+  .ex-pop-title{font-size:14px;font-weight:600;letter-spacing:-0.012em;color:var(--ink);line-height:1.3;flex:1}
+  .ex-pop-close{border:0;background:transparent;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:0 2px}
+  .ex-pop-close:hover{color:var(--ink)}
+  .ex-pop-body{font-size:12.5px;line-height:1.55;color:var(--ink-2);padding:2px 14px 14px;margin:0;max-width:none}
+
+  @media (max-width:980px){
+    .ex-pop{position:fixed;left:14px;right:14px;bottom:14px;top:auto !important;width:auto;z-index:130;transform-origin:50% 100%;transform:translateY(10px)}
+    .ex-pop.show{transform:translateY(0)}
+    .exploded-fig.pinned .ex-dim{position:fixed;inset:0;background:rgba(14,16,20,0.45);z-index:120}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .pin,.ex-pop{transition:none}
+  }
 
   /* ============ PLOT OVERLAYS (label unlabeled charts ourselves) ============ */
   .plot-wrap{position:relative;background:#fff;border:1px solid var(--rule-2);overflow:hidden}
@@ -638,26 +673,35 @@
     <div class="exploded-fig">
       <div class="ex-image">
         <img src="assets/otoscope-exploded-raw.jpg" alt="Exploded view of the final video otoscope assembly" style="padding: 0px">
-        <span class="pin" data-layout-id="pin-1" style="left:36%;top:6.2%">1</span>
-        <span class="pin" data-layout-id="pin-2" style="left:35.5%;top:14%">2</span>
-        <span class="pin" data-layout-id="pin-3" style="left:32%;top:22%">3</span>
-        <span class="pin" data-layout-id="pin-4" style="left:65%;top:10%">4</span>
-        <span class="pin" data-layout-id="pin-5" style="left:29.5%;top:30.5%">5</span>
-        <span class="pin" data-layout-id="pin-6" style="left:34.5%;top:53%">6</span>
-        <span class="pin" data-layout-id="pin-7" style="left:33%;top:78%">7</span>
-        <span class="pin" data-layout-id="pin-8" style="left:33%;top:95.2%">8</span>
+        <button type="button" class="pin" data-part="1" aria-label="Component 1: Supplemental LED light" style="left:36%;top:6.2%">1</button>
+        <button type="button" class="pin" data-part="2" aria-label="Component 2: 3D-printed otoscope head" style="left:35.5%;top:14%">2</button>
+        <button type="button" class="pin" data-part="3" aria-label="Component 3: Bebird wireless camera module" style="left:32%;top:22%">3</button>
+        <button type="button" class="pin" data-part="4" aria-label="Component 4: Disposable speculum" style="left:65%;top:10%">4</button>
+        <button type="button" class="pin" data-part="5" aria-label="Component 5: Supplemental light battery" style="left:29.5%;top:30.5%">5</button>
+        <button type="button" class="pin" data-part="6" aria-label="Component 6: Machined knurled steel handle" style="left:34.5%;top:53%">6</button>
+        <button type="button" class="pin" data-part="7" aria-label="Component 7: USB-C charging extension with rotating insert" style="left:33%;top:78%">7</button>
+        <button type="button" class="pin" data-part="8" aria-label="Component 8: Machined threaded end cap" style="left:33%;top:95.2%">8</button>
+        <div class="ex-dim" aria-hidden="true"></div>
       </div>
       <ol class="ex-legend">
-        <div class="head">Bill of Materials</div>
-        <li><span class="n">1</span><span class="name">Supplemental LED light</span></li>
-        <li><span class="n">2</span><span class="name">3D-printed otoscope head</span></li>
-        <li><span class="n">3</span><span class="name">Bebird wireless camera module</span></li>
-        <li><span class="n">4</span><span class="name">Disposable speculum</span></li>
-        <li><span class="n" style="font-size: 11px">5</span><span class="name">Supplemental light battery</span></li>
-        <li><span class="n">6</span><span class="name">Machined knurled steel handle</span></li>
-        <li><span class="n">7</span><span class="name">USB-C charging extension w/ rotating insert</span></li>
-        <li><span class="n">8</span><span class="name">Machined threaded end cap</span></li>
+        <div class="head"><span>Bill of Materials</span><span class="hint">tap a part for detail ›</span></div>
+        <li data-part="1"><span class="n">1</span><span class="name">Supplemental LED light</span></li>
+        <li data-part="2"><span class="n">2</span><span class="name">3D-printed otoscope head</span></li>
+        <li data-part="3"><span class="n">3</span><span class="name">Bebird wireless camera module</span></li>
+        <li data-part="4"><span class="n">4</span><span class="name">Disposable speculum</span></li>
+        <li data-part="5"><span class="n" style="font-size: 11px">5</span><span class="name">Supplemental light battery</span></li>
+        <li data-part="6"><span class="n">6</span><span class="name">Machined knurled steel handle</span></li>
+        <li data-part="7"><span class="n">7</span><span class="name">USB-C charging extension w/ rotating insert</span></li>
+        <li data-part="8"><span class="n">8</span><span class="name">Machined threaded end cap</span></li>
       </ol>
+      <div class="ex-pop" id="exPop" role="dialog" aria-label="Component detail" aria-hidden="true">
+        <div class="ex-pop-bar">
+          <span class="ex-pop-dot"></span>
+          <span class="ex-pop-title"></span>
+          <button type="button" class="ex-pop-close" aria-label="Close detail">&times;</button>
+        </div>
+        <p class="ex-pop-body"></p>
+      </div>
     </div>
     <div class="cap"><span class="dwg-n">FIG 01.3</span><b>Exploded View</b><span>Final assembly — eight parts simplified to a sleek profile that matches the Welch Allyn clinical instrument</span></div>
   </div>
@@ -1418,6 +1462,90 @@ Full-time · summer 2026
     window.addEventListener('scroll', update, { passive: true });
     window.addEventListener('resize', update);
   }
+})();
+</script>
+
+<script>
+/* ===== Exploded-view: clickable components with detail popover ===== */
+(function(){
+  const fig = document.querySelector('.exploded-fig');
+  const pop = document.getElementById('exPop');
+  if (!fig || !pop) return;
+
+  const PARTS = {
+    1:{name:'Supplemental LED light', body:"Added after canine-cadaver testing showed the Bebird's built-in light went dark inside a real ear canal. Packaged into the printed head without growing the device or blocking the camera path."},
+    2:{name:'3D-printed otoscope head', body:"Houses the camera and supplemental LED, with an internal slot to seat the lens. Its geometry was modeled closely on the Welch Allyn clinical otoscope head so the trainer feels familiar, and 3D-printing kept iteration fast and cheap."},
+    3:{name:'Bebird wireless camera module', body:"Sourced compact camera that replaced the team's original custom ESP32 and beam-splitter optical path. Far smaller and simpler, it streams live video."},
+    4:{name:'Disposable speculum', body:"A standard disposable speculum sized for dogs' ears. It snaps onto the printed head and is thrown away after each use, matching real veterinary practice."},
+    5:{name:'Supplemental light battery', body:"A single AAA cell powering the supplemental LED, sized to fit alongside the charging cable inside the hollowed handle without growing the device."},
+    6:{name:'Machined knurled steel handle', body:"Stock knurled-steel dumbbell handle hollowed on the lathe to 0.8125″ ID for the camera + battery. Reused the factory knurl and threads; brings the device to 1.1 lb to approach the Welch Allyn handfeel."},
+    7:{name:'USB-C charging extension w/ rotating insert', body:"A 3D-printed rotating insert lets the cable spin while the end cap threads on, enabling external charging with no cable twist and no disassembly."},
+    8:{name:'Machined threaded end cap', body:"Closes the handle using the stock part's reused threads; threads onto the rotating insert so charging stays external and serviceable."}
+  };
+
+  const pins = [...fig.querySelectorAll('.ex-image .pin')];
+  const rows = [...fig.querySelectorAll('.ex-legend > li')];
+  const dim = fig.querySelector('.ex-dim');
+  const cDot = pop.querySelector('.ex-pop-dot'), cTitle = pop.querySelector('.ex-pop-title'), cBody = pop.querySelector('.ex-pop-body');
+  const mqMobile = window.matchMedia('(max-width:980px)');
+
+  rows.forEach(row=>{
+    const n = row.dataset.part;
+    row.tabIndex = 0; row.setAttribute('role','button');
+    row.setAttribute('aria-label','Component '+n+': '+(PARTS[n]?PARTS[n].name:''));
+  });
+
+  let activeN = null;   // currently displayed (peek or pinned)
+  let pinnedN = null;   // locked part
+
+  const el = n => ({pin: pins.find(p=>p.dataset.part===String(n)), row: rows.find(r=>r.dataset.part===String(n))});
+  const same = (a,b)=>String(a)===String(b);
+  function setHL(n,on){ const {pin,row}=el(n); if(pin)pin.classList.toggle('is-hl',on); if(row)row.classList.toggle('is-hl',on); }
+  function mark(n){ pins.forEach(p=>p.classList.toggle('is-active',same(p.dataset.part,n))); rows.forEach(r=>r.classList.toggle('is-active',same(r.dataset.part,n))); }
+
+  function positionCard(pin){
+    if (mqMobile.matches){ pop.style.left=''; pop.style.top=''; return; }
+    const fr = fig.getBoundingClientRect(), pr = pin.getBoundingClientRect();
+    const cx = pr.left-fr.left+pr.width/2, cy = pr.top-fr.top+pr.height/2;
+    const pw = pop.offsetWidth, ph = pop.offsetHeight;
+    const right = cx < fr.width*0.5;
+    let left = right ? cx+18 : cx-18-pw;
+    left = Math.max(8, Math.min(left, fr.width-pw-8));
+    let top = Math.max(8, Math.min(cy-ph/2, fr.height-ph-8));
+    pop.style.left = left+'px'; pop.style.top = top+'px';
+    pop.style.setProperty('--ox', right ? '0%' : '100%');
+  }
+
+  function render(){
+    fig.classList.toggle('pinned', pinnedN!=null);
+    mark(activeN);
+    if (activeN!=null){ const d=PARTS[activeN], {pin}=el(activeN);
+      cDot.textContent=activeN; cTitle.textContent=d.name; cBody.textContent=d.body;
+      pop.classList.add('show'); pop.setAttribute('aria-hidden','false'); if(pin) positionCard(pin);
+    } else { pop.classList.remove('show'); pop.setAttribute('aria-hidden','true'); }
+  }
+
+  function peek(n){ activeN=n; render(); }
+  function unpeek(n){ if(same(activeN,n)){ activeN = pinnedN; render(); } }
+  function toggle(n){ if(pinnedN!=null && same(pinnedN,n)){ pinnedN=null; activeN=null; } else { pinnedN=n; activeN=n; } render(); }
+  function closeAll(){ pinnedN=null; activeN=null; render(); }
+
+  [...pins, ...rows].forEach(node=>{
+    const n = node.dataset.part;
+    node.addEventListener('mouseenter', ()=>{ setHL(n,true); peek(n); });
+    node.addEventListener('mouseleave', ()=>{ setHL(n,false); unpeek(n); });
+    node.addEventListener('focus', ()=>{ setHL(n,true); peek(n); });
+    node.addEventListener('blur', ()=>{ setHL(n,false); unpeek(n); });
+    node.addEventListener('click', e=>{ e.stopPropagation(); toggle(n); });
+    if (node.matches('li')) node.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(n); } });
+  });
+
+  pop.addEventListener('click', e=>e.stopPropagation());
+  pop.querySelector('.ex-pop-close').addEventListener('click', e=>{ e.stopPropagation(); closeAll(); });
+  if (dim) dim.addEventListener('click', closeAll);
+  document.addEventListener('click', ()=>{ if(pinnedN!=null) closeAll(); });
+  document.addEventListener('keydown', e=>{ if(e.key==='Escape' && pinnedN!=null) closeAll(); });
+  window.addEventListener('resize', ()=>{ if(activeN!=null){ const {pin}=el(activeN); if(pin) positionCard(pin); } });
 })();
 </script>
 
