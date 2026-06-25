@@ -132,6 +132,11 @@
   .dwg{font-family:var(--mono);font-size:10px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
   .dwg::before{content:"";width:14px;height:1px;background:var(--muted);display:inline-block}
 
+  /* ---------- PROJECT SECTION EMBLEM ---------- */
+  .proj-emblem{position:absolute;top:50px;right:2px;width:124px;height:124px;color:var(--rule-2);pointer-events:none}
+  .proj-emblem svg{width:100%;height:100%;display:block}
+  @media (max-width:1100px){.proj-emblem{display:none}}
+
   /* ============ COVER / OVERVIEW (page 1) ============ */
   .cover{padding:32px 0 64px 0;border-top:0}
   .cover-rule{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:18px;align-items:center;font-family:var(--mono);font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);padding-bottom:18px;border-bottom:1px solid var(--ink)}
@@ -164,15 +169,17 @@
   .works-strip-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:24px}
   .works-strip-head h3{font-size:22px;font-weight:600;letter-spacing:-0.02em}
   .works-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--ink)}
-  .work-card{padding:24px 22px 26px;border-left:1px solid var(--rule);position:relative;text-decoration:none;color:inherit;transition:background .2s ease,transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column;gap:14px;min-height:260px}
+  .work-card{padding:26px 22px;border-left:1px solid var(--rule);position:relative;text-decoration:none;color:inherit;transition:background .2s ease,transform .2s ease,box-shadow .2s ease;display:flex;flex-direction:column;gap:18px;min-height:236px}
   .work-card:first-child{border-left:0}
   .work-card:hover{background:var(--paper-2);transform:translateY(-3px);box-shadow:0 8px 24px rgba(14,16,20,0.08)}
   .work-card:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
-  .work-card .no{font-family:var(--mono);font-size:10.5px;color:var(--accent);letter-spacing:0.12em;font-weight:500}
+  .work-card .wc-icon{width:52px;height:52px;color:var(--ink);transition:color .2s ease}
+  .work-card .wc-icon svg{width:100%;height:100%;display:block}
+  .work-card:hover .wc-icon{color:var(--accent)}
+  .work-card .title{font-size:18px;line-height:1.22;font-weight:500;letter-spacing:-0.015em;color:var(--ink)}
   .work-card .cat{font-family:var(--mono);font-size:10px;color:var(--muted);letter-spacing:0.12em;text-transform:uppercase;margin-top:auto}
-  .work-card .title{font-size:18px;line-height:1.2;font-weight:500;letter-spacing:-0.015em;color:var(--ink)}
-  .work-card .stat{font-family:var(--mono);font-size:11.5px;color:var(--ink-2);border-top:1px solid var(--rule);padding-top:10px;margin-top:6px}
-  .work-card .stat b{color:var(--accent-deep);font-weight:600}
+  .work-card .wc-arrow{position:absolute;top:24px;right:20px;font-family:var(--mono);font-size:16px;color:var(--accent);opacity:0;transform:translateX(-4px);transition:opacity .2s ease,transform .2s ease}
+  .work-card:hover .wc-arrow{opacity:1;transform:translateX(0)}
 
   /* ============ PROJECT HEADER ============ */
   .project-hd{display:grid;grid-template-columns:1fr;gap:0;margin-bottom:48px;position:relative}
@@ -578,28 +585,28 @@
     </div>
     <div class="works-grid">
       <a class="work-card" href="#p1">
-        <div class="no">P · 01</div>
+        <div class="wc-icon" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="15" y="19" width="9" height="17" rx="3"/><line x1="17.5" y1="24" x2="21.5" y2="24"/><line x1="17.5" y1="28" x2="21.5" y2="28"/><line x1="17.5" y1="32" x2="21.5" y2="32"/><circle cx="19.5" cy="14.5" r="3.6"/><path d="M22.2 12.1 L30 8"/><path d="M22.4 17 L30.6 11.2"/><line x1="30" y1="8" x2="30.6" y2="11.2"/></svg></div>
         <div class="title">Veterinary Video Otoscope Housing</div>
-        <div class="stat"><b>6 units</b> delivered to UW Vet Med</div>
         <div class="cat">MEDICAL DEVICE · PRODUCT DEVELOPMENT</div>
+        <span class="wc-arrow" aria-hidden="true">→</span>
       </a>
       <a class="work-card" href="#p2">
-        <div class="no">P · 02</div>
+        <div class="wc-icon" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="23.5" r="11"/><circle cx="20" cy="23.5" r="6"/><circle cx="20" cy="23.5" r="1.6"/><rect x="16" y="3.5" width="8" height="6.5" rx="1.2"/><line x1="20" y1="10" x2="20" y2="12.5"/></svg></div>
         <div class="title">Wisconsin Robotics Swerve-Drive System</div>
-        <div class="stat"><b>12th / 34</b> teams at URC · SF 2.08</div>
         <div class="cat">Robotics · Mechanical Design</div>
+        <span class="wc-arrow" aria-hidden="true">→</span>
       </a>
       <a class="work-card" href="#p3">
-        <div class="no">P · 03</div>
+        <div class="wc-icon" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="24" r="7"/><circle cx="15" cy="24" r="2"/><line x1="15" y1="15" x2="15" y2="17"/><line x1="15" y1="31" x2="15" y2="33"/><line x1="6" y1="24" x2="8" y2="24"/><line x1="22" y1="24" x2="24" y2="24"/><line x1="8.6" y1="17.6" x2="10" y2="19"/><line x1="20" y1="29" x2="21.4" y2="30.4"/><line x1="21.4" y1="17.6" x2="20" y2="19"/><line x1="10" y1="29" x2="8.6" y2="30.4"/><circle cx="27" cy="14" r="5"/><circle cx="27" cy="14" r="1.5"/><line x1="27" y1="7" x2="27" y2="9"/><line x1="27" y1="19" x2="27" y2="21"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="32" y1="14" x2="34" y2="14"/></svg></div>
         <div class="title">Two-Stage Gear Reducer + ML Optimization</div>
-        <div class="stat"><b>2,500-design</b> sweep via ML surrogate</div>
         <div class="cat">Analytical Design · Python</div>
+        <span class="wc-arrow" aria-hidden="true">→</span>
       </a>
       <a class="work-card" href="#p4">
-        <div class="no">P · 04</div>
+        <div class="wc-icon" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 32.5 C 5 32, 3.5 14, 14 10.5 C 22 8, 25.5 16, 20.5 20.5 C 24.5 16.5, 21.5 14.5, 18 16.5 C 12.5 19.5, 13.5 28, 18 32.5 Z"/><path d="M18.5 32.5 C 18 25, 20 20.5, 25 19.5"/><path d="M25.5 32 C 27 28, 27 23, 25 20"/><path d="M18.5 32.5 h8"/><circle cx="29" cy="15.5" r="4"/><path d="M27 12 C 26.5 9, 28.2 8.7, 29.3 11"/><circle cx="32.6" cy="16" r="0.9" fill="currentColor" stroke="none"/></svg></div>
         <div class="title">CO₂ Alert System for Hibernation Research</div>
-        <div class="stat"><b>9.84 s</b> avg. alert latency, n=10</div>
         <div class="cat">Research Tool · Client-Facing</div>
+        <span class="wc-arrow" aria-hidden="true">→</span>
       </a>
     </div>
   </div>
@@ -610,6 +617,7 @@
   <div class="folio">02 · Project 01</div>
 
   <div class="project-hd">
+    <div class="proj-emblem" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="15" y="19" width="9" height="17" rx="3"/><line x1="17.5" y1="24" x2="21.5" y2="24"/><line x1="17.5" y1="28" x2="21.5" y2="28"/><line x1="17.5" y1="32" x2="21.5" y2="32"/><circle cx="19.5" cy="14.5" r="3.6"/><path d="M22.2 12.1 L30 8"/><path d="M22.4 17 L30.6 11.2"/><line x1="30" y1="8" x2="30.6" y2="11.2"/></svg></div>
     <div class="topline">
       <span><b>Project 01</b></span>
       <span>Medical Device · Veterinary Training</span>
@@ -849,6 +857,7 @@
   <div class="folio">03 · Project 02</div>
 
   <div class="project-hd">
+    <div class="proj-emblem" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="23.5" r="11"/><circle cx="20" cy="23.5" r="6"/><circle cx="20" cy="23.5" r="1.6"/><rect x="16" y="3.5" width="8" height="6.5" rx="1.2"/><line x1="20" y1="10" x2="20" y2="12.5"/></svg></div>
     <div class="topline">
       <span><b>Project 02</b></span>
       <span>Robotics · Competition Drivetrain</span>
@@ -1035,6 +1044,7 @@
   <div class="folio">04 · Project 03</div>
 
   <div class="project-hd">
+    <div class="proj-emblem" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="15" cy="24" r="7"/><circle cx="15" cy="24" r="2"/><line x1="15" y1="15" x2="15" y2="17"/><line x1="15" y1="31" x2="15" y2="33"/><line x1="6" y1="24" x2="8" y2="24"/><line x1="22" y1="24" x2="24" y2="24"/><line x1="8.6" y1="17.6" x2="10" y2="19"/><line x1="20" y1="29" x2="21.4" y2="30.4"/><line x1="21.4" y1="17.6" x2="20" y2="19"/><line x1="10" y1="29" x2="8.6" y2="30.4"/><circle cx="27" cy="14" r="5"/><circle cx="27" cy="14" r="1.5"/><line x1="27" y1="7" x2="27" y2="9"/><line x1="27" y1="19" x2="27" y2="21"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="32" y1="14" x2="34" y2="14"/></svg></div>
     <div class="topline">
       <span><b>Project 03</b></span>
       <span>Analytical Design · Optimization</span>
@@ -1216,6 +1226,7 @@
   <div class="folio">05 · Project 04</div>
 
   <div class="project-hd">
+    <div class="proj-emblem" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 32.5 C 5 32, 3.5 14, 14 10.5 C 22 8, 25.5 16, 20.5 20.5 C 24.5 16.5, 21.5 14.5, 18 16.5 C 12.5 19.5, 13.5 28, 18 32.5 Z"/><path d="M18.5 32.5 C 18 25, 20 20.5, 25 19.5"/><path d="M25.5 32 C 27 28, 27 23, 25 20"/><path d="M18.5 32.5 h8"/><circle cx="29" cy="15.5" r="4"/><path d="M27 12 C 26.5 9, 28.2 8.7, 29.3 11"/><circle cx="32.6" cy="16" r="0.9" fill="currentColor" stroke="none"/></svg></div>
     <div class="topline">
       <span><b>Project 04</b></span>
       <span>Research Tool · Animal Physiology</span>
