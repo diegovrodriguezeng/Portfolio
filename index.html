@@ -255,6 +255,19 @@
   .slot-wrap.tall{height:460px}
   /* Bigger for the 3-step assembly sequence so each step reads at a glance */
   .figrow3 .slot-wrap{height:340px}
+
+  /* ===== assembly sequence: arrows + staggered reveal ===== */
+  #asmSeq > .asm-step{position:relative}
+  #asmSeq .asm-arrow{position:absolute;top:170px;right:-10px;transform:translate(50%,-50%) scale(.5);font-family:var(--mono);font-size:24px;color:var(--accent);line-height:1;z-index:4;pointer-events:none;opacity:0;transition:opacity .4s ease,transform .4s ease}
+  #asmSeq .asm-arrow.in{opacity:1;transform:translate(50%,-50%) scale(1)}
+  #asmSeq .asm-step{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+  #asmSeq .asm-step.in{opacity:1;transform:none}
+  @media (max-width:980px){ #asmSeq .asm-arrow{display:none} }
+  @media (prefers-reduced-motion: reduce){
+    #asmSeq .asm-step,#asmSeq .asm-arrow{opacity:1 !important;transition:none}
+    #asmSeq .asm-step{transform:none !important}
+    #asmSeq .asm-arrow{transform:translate(50%,-50%) !important}
+  }
   .figure .slot-wrap.tight{padding:0;height:auto;background:transparent;border:0}
 
   /* ============ EXPLODED VIEW WITH NUMBERED CALLOUTS ============ */
@@ -786,16 +799,18 @@
   <!-- Assembly sequence -->
   <div class="figure">
     <div class="dim-h"><span></span><span class="label">Assembly Sequence · 3 Steps</span><span></span></div>
-    <div class="figrow3">
-      <div>
+    <div class="figrow3" id="asmSeq">
+      <div class="asm-step">
         <div class="slot-wrap"><img src="assets/otoscope-charge1.jpg" alt="01 · Cable + 3D-printed insert" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
         <div class="cap"><span class="dwg-n">01</span><b>Insert</b></div>
+        <span class="asm-arrow" aria-hidden="true">&rarr;</span>
       </div>
-      <div>
+      <div class="asm-step">
         <div class="slot-wrap"><img src="assets/otoscope-charge2.jpg" alt="02 · Steel end cap installed" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
         <div class="cap"><span class="dwg-n">02</span><b>End Cap</b></div>
+        <span class="asm-arrow" aria-hidden="true">&rarr;</span>
       </div>
-      <div>
+      <div class="asm-step">
         <div class="slot-wrap"><img src="assets/otoscope-charge3.jpg" alt="03 · External charging" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block"></div>
         <div class="cap"><span class="dwg-n">03</span><b>Charging</b></div>
       </div>
@@ -1557,6 +1572,21 @@ Full-time · summer 2026
   document.addEventListener('click', ()=>{ if(pinnedN!=null) closeAll(); });
   document.addEventListener('keydown', e=>{ if(e.key==='Escape' && pinnedN!=null) closeAll(); });
   window.addEventListener('resize', ()=>{ if(activeN!=null){ const {pin}=el(activeN); if(pin) positionCard(pin); } });
+})();
+</script>
+
+<script>
+(function(){
+  const grid = document.getElementById('asmSeq');
+  if (!grid) return;
+  const seq = [...grid.querySelectorAll('.asm-step, .asm-arrow')];
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function reveal(){ seq.forEach((el,i)=>{ el.style.transitionDelay = (reduce ? 0 : i*110) + 'ms'; el.classList.add('in'); }); }
+  if (!('IntersectionObserver' in window) || reduce){ reveal(); return; }
+  const io = new IntersectionObserver((entries,obs)=>{
+    entries.forEach(e=>{ if (e.isIntersecting){ reveal(); obs.disconnect(); } });
+  }, { threshold: 0.25 });
+  io.observe(grid);
 })();
 </script>
 
