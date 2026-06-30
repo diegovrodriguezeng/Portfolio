@@ -306,6 +306,8 @@
   .ex-pop-title{font-size:14px;font-weight:600;letter-spacing:-0.012em;color:var(--ink);line-height:1.3;flex:1}
   .ex-pop-close{border:0;background:transparent;color:var(--muted);font-size:18px;line-height:1;cursor:pointer;padding:0 2px}
   .ex-pop-close:hover{color:var(--ink)}
+  .ex-pop-img{display:block;width:100%;height:168px;object-fit:cover;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);background:var(--paper-2);margin-bottom:11px}
+  .ex-pop-img[hidden]{display:none}
   .ex-pop-body{font-size:12.5px;line-height:1.55;color:var(--ink-2);padding:2px 14px 14px;margin:0;max-width:none}
 
   @media (max-width:980px){
@@ -721,6 +723,7 @@
           <span class="ex-pop-title"></span>
           <button type="button" class="ex-pop-close" aria-label="Close detail">&times;</button>
         </div>
+        <img class="ex-pop-img" alt="" hidden>
         <p class="ex-pop-body"></p>
       </div>
     </div>
@@ -1052,6 +1055,14 @@
     <div class="label">In Competition</div>
     <div class="text">Installed on every swerve module of the competition rover. In-place turning held. Modules stopped wobbling. The motor stayed clean. <b>The team finished 12th of 34 at URC.</b></div>
   </div>
+
+  <div class="narrative" style="margin-top:48px">
+    <div class="col-h">In Hindsight<span class="sub">What I'd Change</span></div>
+    <div class="body">
+      <p>The redesign did its job at competition — alignment tightened, the modules stopped wobbling, and the rover turned in place — but I largely confirmed that by eye. Next time I'd validate it with numbers: before-and-after wobble or deflection measurements at the module, so the improvement is quantified rather than just observed.</p>
+      <p>I'd also run FEA on the integrated tube-and-gearbox extension, especially around the bolt holes and the shaft receiver. The EES hand-analysis sized the connecting shaft, but it didn't capture the local stresses where the receiver meets the housing — and I'd want to confirm the simpler geometry didn't trade the clamp's flex for a new stress concentration.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ============ PROJECT 03 — GEAR REDUCER ============ -->
@@ -1230,8 +1241,8 @@
   <div class="narrative" style="margin-top:48px">
     <div class="col-h">In Hindsight<span class="sub">What I'd Change</span></div>
     <div class="body">
-      <p>The Random Forest surrogate fits a deterministic analytical model — that's why it scores so cleanly. A second-order polynomial response surface would have done the same job with a fraction of the code; the ML framing is real, but it's the <strong>sweep</strong>, not the model class, that did the work. I'd lead with that next time.</p>
-      <p>I'd also run a finite-life fatigue check on the optimized variant before recommending it. Dropping SF_gear from 1.31 to 1.22 stays inside the static constraint, but it shortens the design life — and the team's brief didn't quantify that trade. Owning that question is the next step.</p>
+      <p>The optimization chased mass and safety factor, but it didn't know what a machinist knows. Next time I'd make it <strong>manufacturing-aware</strong> — folding in machining tolerances, assembly clearances, and cost so the "optimal" design is one you can actually cut and assemble, not just one that's light on paper.</p>
+      <p>I'd also treat the Random Forest as what it is: a fast surrogate, not final proof. Before recommending the lighter variant, I'd validate it with an independent check — a direct analytical or FEA pass on the winning design — so the speed of the sweep never gets mistaken for confidence in the result.</p>
     </div>
   </div>
 </section>
@@ -1350,6 +1361,14 @@
   <div class="callout">
     <div class="label">Takeaway</div>
     <div class="text">My first full client-facing prototype — translating a research need into a low-cost physical design with environmental constraints and validated alert performance.</div>
+  </div>
+
+  <div class="narrative" style="margin-top:48px">
+    <div class="col-h">In Hindsight<span class="sub">What I'd Change</span></div>
+    <div class="body">
+      <p>This was my first full client project, and the packaging shows it. I'd give the electronics a dedicated external enclosure — most likely 3D-printed — rather than leaving them on the prototype, and add real protection for the exposed tubing so it holds up to handling in the cold room.</p>
+      <p>I'd also test more inside the refrigerated habitat instead of approximating it, and rethink the air pump entirely — a quieter, lower-power version, or a passive design with no pump at all, would be gentler on the animals and simpler to maintain. With the engineering I've picked up since, it's a project I'd genuinely like to take another pass at.</p>
+    </div>
   </div>
 </section>
 
@@ -1499,20 +1518,20 @@ Full-time · summer 2026
   if (!fig || !pop) return;
 
   const PARTS = {
-    1:{name:'Supplemental LED light', body:"Added after canine-cadaver testing showed the Bebird's built-in light went dark inside a real ear canal. Packaged into the printed head without growing the device or blocking the camera path."},
-    2:{name:'3D-printed otoscope head', body:"Houses the camera and supplemental LED, with an internal slot to seat the lens. Its geometry was modeled closely on the Welch Allyn clinical otoscope head so the trainer feels familiar, and 3D-printing kept iteration fast and cheap."},
+    1:{name:'Supplemental LED light', img:'assets/otoscope-led-view.jpg', body:"Added after canine-cadaver testing showed the Bebird's built-in light went dark inside a real ear canal. Packaged into the printed head without growing the device or blocking the camera path."},
+    2:{name:'3D-printed otoscope head', img:'assets/otoscope-head-model.jpg', fit:'contain', body:"Houses the camera and supplemental LED, with an internal slot to seat the lens. Its geometry was modeled closely on the Welch Allyn clinical otoscope head so the trainer feels familiar, and 3D-printing kept iteration fast and cheap."},
     3:{name:'Bebird wireless camera module', body:"Sourced compact camera that replaced the team's original custom ESP32 and beam-splitter optical path. Far smaller and simpler, it streams live video."},
     4:{name:'Disposable speculum', body:"A standard disposable speculum sized for dogs' ears. It fits onto the printed head with a press fit and is thrown away after each use, matching real veterinary practice."},
     5:{name:'Supplemental light battery', body:"A single AAA cell powering the supplemental LED, sized to fit alongside the charging cable inside the hollowed handle without growing the device."},
     6:{name:'Machined knurled steel handle', body:"Stock knurled-steel dumbbell handle hollowed on the lathe to 0.8125″ ID for the camera + battery. Reused the factory knurl and threads; brings the device to 1.1 lb to approach the Welch Allyn handfeel."},
-    7:{name:'USB-C charging extension w/ rotating insert', body:"A 3D-printed rotating insert lets the cable spin while the end cap threads on, enabling external charging with no cable twist and no disassembly."},
-    8:{name:'Machined threaded end cap', body:"Closes the handle using the stock part's reused threads; threads onto the rotating insert so charging stays external and serviceable."}
+    7:{name:'USB-C charging extension w/ rotating insert', img:'assets/otoscope-insert-view.jpg', fit:'contain', body:"A 3D-printed rotating insert lets the cable spin while the end cap threads on, enabling external charging with no cable twist and no disassembly."},
+    8:{name:'Machined threaded end cap', img:'assets/otoscope-endcap-view.jpg', body:"Closes the handle using the stock part's reused threads; threads onto the rotating insert so charging stays external and serviceable."}
   };
 
   const pins = [...fig.querySelectorAll('.ex-image .pin')];
   const rows = [...fig.querySelectorAll('.ex-legend > li')];
   const dim = fig.querySelector('.ex-dim');
-  const cDot = pop.querySelector('.ex-pop-dot'), cTitle = pop.querySelector('.ex-pop-title'), cBody = pop.querySelector('.ex-pop-body');
+  const cDot = pop.querySelector('.ex-pop-dot'), cTitle = pop.querySelector('.ex-pop-title'), cBody = pop.querySelector('.ex-pop-body'), cImg = pop.querySelector('.ex-pop-img');
   const mqMobile = window.matchMedia('(max-width:980px)');
 
   rows.forEach(row=>{
@@ -1547,6 +1566,8 @@ Full-time · summer 2026
     mark(activeN);
     if (activeN!=null){ const d=PARTS[activeN], {pin}=el(activeN);
       cDot.textContent=activeN; cTitle.textContent=d.name; cBody.textContent=d.body;
+      if (d.img){ if (cImg.getAttribute('src')!==d.img) cImg.src=d.img; cImg.alt=d.name; cImg.style.objectFit=d.fit||'cover'; cImg.hidden=false; }
+      else { cImg.hidden=true; cImg.removeAttribute('src'); }
       pop.classList.add('show'); pop.setAttribute('aria-hidden','false'); if(pin) positionCard(pin);
     } else { pop.classList.remove('show'); pop.setAttribute('aria-hidden','true'); }
   }
